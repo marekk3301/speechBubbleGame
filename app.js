@@ -135,6 +135,10 @@ function checkRecipe() {
             type: 'res',
             text: `You've given me everything I wanted! Here's a ${givenEmoji} for you!` // Example response
         });
+        currentContact.chatHistory.push({
+            type: 'res',
+            text: `This user is offline` // Example response
+        });
     } else {
         currentContact.chatHistory.push({
             type: 'res',
@@ -260,7 +264,11 @@ function updateContactDisplay() {
 
     chatHistory.forEach(bubble => {
         const bubbleElement = document.createElement('div');
-        bubbleElement.className = `bubble ${bubble.type === 'req' ? 'bubble_req' : 'bubble_res'}`;
+        if (bubble.text === "This user is offline") {
+            bubbleElement.className = `bubble status-message`; // Add the status class
+        } else {
+            bubbleElement.className = `bubble ${bubble.type === 'req' ? 'bubble_req' : 'bubble_res'}`;
+        }
         bubbleElement.textContent = bubble.text;
         bubblesContainer.appendChild(bubbleElement);
     });
