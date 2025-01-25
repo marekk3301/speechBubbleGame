@@ -10,7 +10,7 @@ let selectedCategory = '';
 async function getEmojisJSON() {
     try {
         // Fetch the emojis.json file
-        const response = await fetch('emojis.json');
+        const response = await fetch('https://raw.githubusercontent.com/marekk3301/speechBubbleGame/refs/heads/master/emojis.json');
 
         if (!response.ok) {
             throw new Error(`Failed to fetch emojis.json: ${response.status} ${response.statusText}`);
@@ -78,19 +78,26 @@ function checkRecipe() {
     // Chat functionality
 
     const currentContact = contacts[Object.keys(contacts)[currentContactIndex]];
-
-    // Check if the selected emojis match any of the emojis in the wants list
     const wants = currentContact.wants;
-    const sentEmojis = selectedEmojis.slice(); // Copy the selected emojis array
-    console.log(sentEmojis);
 
-    // Iterate over the wants list and remove any matching emojis from the sentEmojis
-    for (let i = wants.length - 1; i >= 0; i--) {
-        if (sentEmojis.includes(wants[i])) {
-            // Remove the emoji from the wants list
-            wants.splice(i, 1);
-            // Remove the emoji from the sentEmojis to avoid duplicate removal
-            sentEmojis.splice(sentEmojis.indexOf(wants[i]), 1);
+    // Copy selected emojis for comparison
+    const sentEmojis = [...selectedEmojis];
+
+    // Find matching emojis and remove them from `wants`
+    const matchedEmojis = [];
+    for (const emoji of wants) {
+        const emojiIndex = sentEmojis.indexOf(emoji);
+        if (emojiIndex !== -1) {
+            matchedEmojis.push(emoji);
+            sentEmojis.splice(emojiIndex, 1); // Remove matched emoji from sentEmojis
+        }
+    }
+
+    // Remove all matched emojis from the wants list
+    for (const matchedEmoji of matchedEmojis) {
+        const wantIndex = wants.indexOf(matchedEmoji);
+        if (wantIndex !== -1) {
+            wants.splice(wantIndex, 1);
         }
     }
 
@@ -100,15 +107,15 @@ function checkRecipe() {
         text: selectedEmojis.join(' ') // Convert the selected emojis to text
     });
 
-    // Simulate a response (you can replace this with a real response logic)
+    // Simulate a response based on whether all wants are satisfied
     if (wants.length === 0) {
         currentContact.chatHistory.push({
-            type: 'res', // Type 'res' for response bubbles
+            type: 'res',
             text: "You've given me everything I wanted!" // Example response
         });
     } else {
         currentContact.chatHistory.push({
-            type: 'res', // Type 'res' for response bubbles
+            type: 'res',
             text: "Thank you for the emoji!" // Example response
         });
     }
@@ -166,7 +173,7 @@ let currentContactIndex = 0;
 
 async function getContactsJSON() {
     try {
-        const response = await fetch('./contacts.json');
+        const response = await fetch('https://raw.githubusercontent.com/marekk3301/speechBubbleGame/refs/heads/master/contacts.json');
 
         if (!response.ok) {
             throw new Error(`Failed to fetch contacts.json: ${response.status} ${response.statusText}`);
