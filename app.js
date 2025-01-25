@@ -10,7 +10,7 @@ let selectedCategory = '';
 async function getEmojisJSON() {
     try {
         // Fetch the emojis.json file
-        const response = await fetch('https://raw.githubusercontent.com/marekk3301/speechBubbleGame/refs/heads/master/emojis.json');
+        const response = await fetch('./emojis.json');
 
         if (!response.ok) {
             throw new Error(`Failed to fetch emojis.json: ${response.status} ${response.statusText}`);
@@ -57,6 +57,7 @@ function populateEmojiList(emojis) {
 
 
 function checkRecipe() {
+    let newEmoji = "";
     Object.keys(allEmojis.categories).forEach(emote => {
         Object.keys(allEmojis.categories[emote]).forEach(emoji => {
             if (emoji !== 'unlocked' && emoji !== "to_recieve") {
@@ -67,6 +68,7 @@ function checkRecipe() {
                         allEmojis.categories[emote].unlocked.push(emoji);
                         delete allEmojis.categories[emote][emoji];  // Remove the recipe once it's unlocked
                         console.log(`Unlocked emoji: ${emoji} for recipe: ${recipe}`);
+                        newEmoji = emoji
                     }
                 });
             }
@@ -151,7 +153,7 @@ function checkRecipe() {
     } else {
         currentContact.chatHistory.push({
             type: 'res',
-            text: "Thank you for the emoji!" // Example response
+            text: newEmoji // Example response
         });
     }
 
@@ -253,7 +255,7 @@ let contacts = {}; // Store only active contacts
 async function getContactsJSON() {
     try {
         // Fetch the contacts JSON file
-        const response = await fetch('https://raw.githubusercontent.com/marekk3301/speechBubbleGame/refs/heads/master/contacts.json');
+        const response = await fetch('./contacts.json');
 
         if (!response.ok) {
             throw new Error(`Failed to fetch contacts.json: ${response.status} ${response.statusText}`);

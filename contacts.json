@@ -18,6 +18,20 @@
         "is_active": false,
         "wants": ["😺", "😸", "😹"],
         "gives": ["❤️"],
+        "unlocks": ["Cook Jim"]
+    },
+    "Cook Jim": {
+        "description": "Annie's father and amateur chef",
+        "is_active": false,
+        "wants": ["😺", "😸", "😹"],
+        "gives": ["❤️"],
+        "unlocks": []
+    },
+    "Lady Adelaide": {
+        "description": "Greetings, my dearest, I trust you have brought forth the gifts I so rightfully deserve?",
+        "is_active": false,
+        "wants": ["💌", "💎", "💍"],
+        "gives": ["💌"],
         "unlocks": []
     }
 }
