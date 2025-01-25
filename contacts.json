@@ -1,16 +1,19 @@
 {
     "Clementine": {
         "description": "Clementine is a very funny person. She loves to laugh and make others laugh.",
+        "is_active": true,
         "wants": ["🤣", "😂", "😄"],
         "gives": ["🐈"]
     },
     "Dylan": {
         "description": "Dylan just loves to chill.",
+        "is_active": true,
         "wants": ["🙂", "🙁", "😮"],
         "gives": ["🍕"]
     },
     "Annie": {
         "description": "Annie loves cats, she adopts every single one.",
+        "is_active": true,
         "wants": ["😺", "😸", "😹"],
         "gives": ["❤️"]
     }

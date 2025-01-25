@@ -218,10 +218,18 @@ async function getContactsJSON() {
 
         contacts = await response.json();
 
-        // Initialize chat history for each contact
-        Object.keys(contacts).forEach(contactName => {
+        // Filter only active contacts
+        const activeContacts = Object.keys(contacts).filter(contactName => contacts[contactName].is_active);
+
+        // Create a new object containing only active contacts
+        const activeContactsObj = {};
+        activeContacts.forEach(contactName => {
+            activeContactsObj[contactName] = contacts[contactName];
             contacts[contactName].chatHistory = []; // Add a chatHistory array
         });
+
+        // Update the contacts object with only active contacts
+        contacts = activeContactsObj;
 
         updateContactDisplay();
     } catch (error) {
@@ -229,15 +237,23 @@ async function getContactsJSON() {
     }
 }
 
+
 prevContactButton.addEventListener('click', () => {
-    currentContactIndex = (currentContactIndex - 1 + Object.keys(contacts).length) % Object.keys(contacts).length;
+    const contactNames = Object.keys(contacts);
+    if (contactNames.length === 0) return;
+
+    currentContactIndex = (currentContactIndex - 1 + contactNames.length) % contactNames.length;
     updateContactDisplay();
 });
 
 nextContactButton.addEventListener('click', () => {
-    currentContactIndex = (currentContactIndex + 1) % Object.keys(contacts).length;
+    const contactNames = Object.keys(contacts);
+    if (contactNames.length === 0) return;
+
+    currentContactIndex = (currentContactIndex + 1) % contactNames.length;
     updateContactDisplay();
 });
+
 
 document.addEventListener('DOMContentLoaded', () => {
     getContactsJSON();
@@ -273,6 +289,7 @@ function updateContactDisplay() {
         bubblesContainer.appendChild(bubbleElement);
     });
 }
+
 
 // Main function
 
