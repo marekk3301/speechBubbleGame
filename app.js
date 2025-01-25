@@ -59,12 +59,14 @@ function populateEmojiList(emojis) {
 function checkRecipe() {
     Object.keys(allEmojis.categories).forEach(emote => {
         Object.keys(allEmojis.categories[emote]).forEach(emoji => {
-            if (emoji !== 'unlocked') {
+            if (emoji !== 'unlocked' && emoji !== "to_recieve") {
                 allEmojis.categories[emote][emoji].forEach(recipe => {
+                    // Check if selected emojis match the recipe
                     if (areArraysEqualUnordered(recipe, selectedEmojis)) {
+                        // Unlock the emoji by adding it to the unlocked list
                         allEmojis.categories[emote].unlocked.push(emoji);
-                        delete allEmojis.categories[emote][emoji];
-                        console.log(allEmojis);
+                        delete allEmojis.categories[emote][emoji];  // Remove the recipe once it's unlocked
+                        console.log(`Unlocked emoji: ${emoji} for recipe: ${recipe}`);
                     }
                 });
             }
@@ -129,9 +131,6 @@ function checkRecipe() {
             console.error(`Category for emoji ${givenEmoji} not found in 'to_recieve' or 'unlocked'.`);
         }
 
-        // Refresh all categories by re-populating the emoji list
-        populateEmojiList(allEmojis); // Re-populate all categories' emojis
-
         currentContact.chatHistory.push({
             type: 'res',
             text: `You've given me everything I wanted! Here's a ${givenEmoji} for you!` // Example response
@@ -143,6 +142,9 @@ function checkRecipe() {
         });
     }
 
+    // Refresh all categories by re-populating the emoji list
+    populateEmojiList(allEmojis); // Re-populate all categories' emojis
+
     // Display the updated chat history and contact description
     updateContactDisplay();
 
@@ -150,6 +152,7 @@ function checkRecipe() {
     selectedEmojis = [];
     emojiSelectedElement.innerHTML = '';
 }
+
 
 
 
