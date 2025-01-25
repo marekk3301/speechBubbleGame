@@ -81,6 +81,10 @@ function refreshEmojis(emote) {
 }
 
 function checkRecipe() {
+    if (selectedEmojis.length === 0) {
+        console.log('No emojis selected.');
+        return;
+    }
     const currentContact = contacts[Object.keys(contacts)[currentContactIndex]];
 
     // Process recipe matching and unlocking emojis
@@ -377,7 +381,12 @@ function updateContactDisplay() {
 
 function main() {
     const sendButton = document.querySelector('.send__button');
+    const eraseButton = document.querySelector('.erase__button');
     sendButton.addEventListener('click', checkRecipe);
+    eraseButton.addEventListener('click', _ => {
+        selectedEmojis = [];
+        emojiSelectedElement.innerHTML = '';
+    });
     
     getEmojisJSON()
     .then(emojis => {
