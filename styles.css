@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Bangers);
+
 /* General styles */
 * {
     margin: 0;
@@ -12,15 +14,26 @@ body {
     height: 100vh;
     background: url('./assets/conversation_background.png') no-repeat center center;
     background-size: cover;
-    font-family: "Comic Sans MS", "Patrick Hand", cursive;
+    font-family: 'Bangers', cursive;
 }
 
+.phone-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    width: 90vw;
+}
+
+/* The phone container itself */
 .phone {
-    width: 360px;
+    width: 480px;
     height: 640px;
     background: #fff;
-    border: 5px solid #000;
-    border-radius: 20px;
+    border: solid black;
+    border-color: black;
+    border-width: 4px 5px 4px 6px; /* Border styling similar to .box1 */
+    border-radius: 99% 4% 52% 5%/2% 15% 6% 95%;
     overflow: hidden;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
     display: flex;
@@ -38,8 +51,10 @@ body {
     align-items: center;
     justify-content: space-between;
     background: linear-gradient(90deg, #c56295, #cc1b5b);
-    padding: 10px 15px;
+    padding: 20px 15px;
+    padding-top: 25px;
     height: 80px;
+    border-radius: 0% 0% 0% 95%/80% 4% 92% 5%;
     border-bottom: 5px solid #000;
 }
 
@@ -49,17 +64,19 @@ body {
 }
 
 .contact-name {
-    font-size: 1.4rem;
-    font-weight: bold;
-    color: #000;
-    text-shadow: 1px 1px #fff;
+    font-size: 1.9rem;
+    color: #fddb00;
+    text-shadow: 2px 5px #000000;
+    letter-spacing: 5px; /* Increases space between the letters */
+    -webkit-text-stroke: 1px #000000; /* Adds a border/stroke to the letters */
 }
 
+
 .contact-description {
-    font-size: 0.9rem;
+    font-size: 1.3rem;
     color: #333;
-    text-shadow: 1px 1px #fff;
-    margin-top: 5px;
+    text-shadow: 4px 4px #000000;
+    margin: 4px 0px;
 }
 
 .prev-contact, .next-contact {
@@ -72,6 +89,15 @@ body {
     font-size: 1rem;
     transition: all 0.3s ease;
     text-shadow: 1px 1px #fff;
+    border-width: 3px 2px 2px 4px;
+    transform: rotate(1deg);
+}
+
+.prev-contact {
+    border-radius:75% 50% 67% 65%/40% 74% 30% 70%;
+}
+.next-contact {
+    border-radius:35% 50% 57% 45%/40% 34% 30% 35%;
 }
 
 .prev-contact:hover, .next-contact:hover {
@@ -86,7 +112,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    overflow-y: auto;
     background: #fafafa;
 }
 
@@ -137,13 +162,16 @@ body {
 }
 
 .panel {
-    padding: 10px;
+    padding: 20px 30px;
     background: #f9f9f9;
-    border-top: 5px solid #000;
     display: flex;
     flex-direction: column;
     gap: 15px;
+    border-top: 5px solid #000; /* Only top border */
+    border-radius: 1% 95% 6% 95%/95% 4% 92% 5%;
+    /* No other borders, just the top one */
 }
+
 
 .categories__list {
     display: flex;
