@@ -131,6 +131,15 @@ function checkRecipe() {
             console.error(`Category for emoji ${givenEmoji} not found in 'to_recieve' or 'unlocked'.`);
         }
 
+        // Unlock contacts specified in the "unlocks" array
+        console.log(currentContact.unlocks);
+        unlockContacts(currentContact.unlocks);
+
+        // Mark the current contact as offline (inactive) using its name from the contact's key
+        const currentContactName = Object.keys(contacts)[currentContactIndex]; // Get the contact's name as the key
+        contacts[currentContactName].is_active = "false"; // Set the current contact's status to offline
+        console.log(`Marked ${currentContactName} as offline (inactive).`);
+
         currentContact.chatHistory.push({
             type: 'res',
             text: `You've given me everything I wanted! Here's a ${givenEmoji} for you!` // Example response
@@ -157,6 +166,37 @@ function checkRecipe() {
     emojiSelectedElement.innerHTML = '';
 }
 
+function unlockContacts(unlockArray) {
+    unlockArray.forEach(unlockedContact => {
+        // Ensure the contact exists in the allContacts object (even inactive ones)
+        console.log(allContacts);
+        console.log(unlockedContact);
+
+        // Check if the contact exists in allContacts
+        if (allContacts.hasOwnProperty(unlockedContact)) {
+            // Log to ensure the contacts and unlockedContact are accessible
+            console.log("Unlocking:", unlockedContact);
+            console.log("Contact details:", allContacts[unlockedContact]);
+
+            // Set the status of the unlocked contact to active
+            allContacts[unlockedContact].is_active = "true"; // Set the status to active
+            console.log(`Unlocked ${unlockedContact} and set status to active.`);
+
+            // Add the unlocked contact to the active contacts list
+            // We need to add it to contacts object if not already there
+            if (!contacts.hasOwnProperty(unlockedContact)) {
+                contacts[unlockedContact] = allContacts[unlockedContact]; // Add to active contacts
+                contacts[unlockedContact].chatHistory = []; // Initialize the chat history array
+                console.log(`${unlockedContact} has been added to active contacts.`);
+            }
+
+            // Optional: Log the unlocked contact's status
+            console.log(`${unlockedContact} is now active: ${allContacts[unlockedContact].is_active}`);
+        } else {
+            console.log(`Contact ${unlockedContact} is not found in the allContacts list.`);
+        }
+    });
+}
 
 
 
@@ -205,32 +245,43 @@ const contactDescriptionElement = document.querySelector('.contact-description')
 const prevContactButton = document.querySelector('.prev-contact');
 const nextContactButton = document.querySelector('.next-contact');
 
-let contacts = {};
 let currentContactIndex = 0;
+
+let allContacts = {}; // Store all contacts, including inactive ones
+let contacts = {}; // Store only active contacts
 
 async function getContactsJSON() {
     try {
+        // Fetch the contacts JSON file
         const response = await fetch('https://raw.githubusercontent.com/marekk3301/speechBubbleGame/refs/heads/master/contacts.json');
 
         if (!response.ok) {
             throw new Error(`Failed to fetch contacts.json: ${response.status} ${response.statusText}`);
         }
 
-        contacts = await response.json();
+        // Parse the response data as JSON
+        allContacts = await response.json(); // Save all contacts, including inactive ones
+        console.log('Fetched Contacts:', allContacts); // Debugging the fetched data
 
         // Filter only active contacts
-        const activeContacts = Object.keys(contacts).filter(contactName => contacts[contactName].is_active);
+        const activeContacts = Object.keys(allContacts).filter(contactName => allContacts[contactName].is_active);
+
+        console.log('Active Contacts:', activeContacts); // Debugging the active contacts
 
         // Create a new object containing only active contacts
-        const activeContactsObj = {};
+        contacts = {};
         activeContacts.forEach(contactName => {
-            activeContactsObj[contactName] = contacts[contactName];
+            contacts[contactName] = allContacts[contactName]; // Store only active contacts
             contacts[contactName].chatHistory = []; // Add a chatHistory array
         });
 
-        // Update the contacts object with only active contacts
-        contacts = activeContactsObj;
+        // If there are no active contacts, display a message or handle as needed
+        if (Object.keys(contacts).length === 0) {
+            console.log('No active contacts available.');
+            // Handle the case where no active contacts exist, if needed
+        }
 
+        // Call updateContactDisplay to show active contacts
         updateContactDisplay();
     } catch (error) {
         console.error('Error loading contacts:', error);

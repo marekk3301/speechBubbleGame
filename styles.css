@@ -221,6 +221,35 @@ body {
     filter: grayscale(100%);
 }
 
+/* Target the entire scrollbar */
+::-webkit-scrollbar {
+    width: 6px; /* Make the vertical scrollbar thinner */
+    margin-right: 2px; /* Space between scrollbar and right edge */
+    margin-top: 3px; /* Space between scrollbar and top edge */
+    margin-bottom: 3px; /* Space between scrollbar and bottom edge */
+  }
+  
+  /* Style the track (background of the scrollbar) */
+  ::-webkit-scrollbar-track {
+    background: transparent; /* Light gray background */
+    border-radius: 10px; /* Rounded corners */
+    padding: 4px 0; /* Optional: add space at top and bottom of the track */
+  }
+  
+  /* Style the thumb (the draggable part of the scrollbar) */
+  ::-webkit-scrollbar-thumb {
+    background: #b0b0b0; /* Lighter gray color for the thumb */
+    border-radius: 10px; /* Rounded corners */
+  }
+  
+  /* Hover effect for the thumb */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #888; /* Slightly darker gray when hovered */
+  }
+  
+  
+  
+
 @media screen and (max-width: 400px) {
     .phone {
         width: 320px;
