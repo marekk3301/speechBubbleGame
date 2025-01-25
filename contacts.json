@@ -4,34 +4,130 @@
         "is_active": true,
         "wants": ["🤣", "😂", "😄"],
         "gives": ["🐈"],
-        "unlocks": ["Annie"]
+        "unlocks": ["Annie", "Fortune Teller"]
     },
     "Dylan": {
         "description": "Dylan just loves to chill.",
         "is_active": true,
-        "wants": ["🙂", "🙁", "😮"],
-        "gives": ["🍕"],
-        "unlocks": []
+        "wants": ["☹️", "😢", "😭"],
+        "gives": ["🔥", "🍕", "🕶️"],
+        "unlocks": ["Dj David", "Teacher"]
     },
+
     "Annie": {
         "description": "Annie loves cats, she adopts every single one.",
         "is_active": false,
-        "wants": ["😺", "😸", "😹"],
-        "gives": ["❤️"],
-        "unlocks": ["Cook Jim"]
+        "wants": ["😺", "😸", "😹", "😿"],
+        "gives": ["❤️", "🌱"],
+        "unlocks": ["Cook Clint", "Farmer Frank"]
     },
-    "Cook Jim": {
+    "Cook Clint": {
         "description": "Annie's father and amateur chef",
         "is_active": false,
-        "wants": ["😺", "😸", "😹"],
-        "gives": ["❤️"],
+        "wants": ["", "", ""],
+        "gives": [""],
+        "unlocks": ["Chef Gordon"]
+    },
+    "Farmer Frank": {
+        "description": "",
+        "is_active": false,
+        "wants": ["", "", ""],
+        "gives": ["🌾"],
+        "unlocks": ["Ranger Rodger"]
+    },
+    "Ranger Rodger": {
+        "description": "",
+        "is_active": false,
+        "wants": ["", "", ""],
+        "gives": [""],
         "unlocks": []
     },
+    "Chef Gordon": {
+        "description": "Top class chef",
+        "is_active": false,
+        "wants": ["🍣", "🍷", "🍰", "🔪", "🍽"],
+        "gives": [""],
+        "unlocks": []
+    },
+
+    "Big Jim": {
+        "description": "Local mafia's boss",
+        "is_active": false,
+        "wants": ["💊", "🌿", ""],
+        "gives": ["💣"],
+        "unlocks": []
+    },
+    "Bubbles The Clown": {
+        "description": "Annie's father and amateur chef",
+        "is_active": false,
+        "wants": ["🤡", "", ""],
+        "gives": ["🔪"],
+        "unlocks": []
+    },
+    "Dj David": {
+        "description": "",
+        "is_active": false,
+        "wants": ["🤩", "🥳", "🤢", "🤮"],
+        "gives": [""],
+        "unlocks": []
+    },
+
+    "Fortune Teller": {
+        "description": "",
+        "is_active": false,
+        "wants": ["", "", ""],
+        "gives": [""],
+        "unlocks": []
+    },
+    "Wizzard": {
+        "description": "",
+        "is_active": false,
+        "wants": ["", "", ""],
+        "gives": [""],
+        "unlocks": []
+    },
+    "Vampire": {
+        "description": "",
+        "is_active": false,
+        "wants": ["🧄", "🔪"],
+        "gives": ["⚰"],
+        "unlocks": []
+    },
+    "Mr. Bones": {
+        "description": "",
+        "is_active": false,
+        "wants": ["", "", "⚰", ""],
+        "gives": ["💀"],
+        "unlocks": []
+    },
+
+    "Teacher": {
+        "description": "",
+        "is_active": false,
+        "wants": ["", "", ""],
+        "gives": [""],
+        "unlocks": []
+    },
+    "Painter Bob": {
+        "description": "",
+        "is_active": false,
+        "wants": ["", "", ""],
+        "gives": [""],
+        "unlocks": []
+    },
+    "Nicolaj Copiernik": {
+        "description": "",
+        "is_active": false,
+        "wants": ["🌞", "💦", "🌧"],
+        "gives": ["⭐️", "☄️"],
+        "unlocks": []
+    },
+
     "Lady Adelaide": {
         "description": "Greetings, my dearest, I trust you have brought forth the gifts I so rightfully deserve?",
         "is_active": false,
-        "wants": ["💌", "💎", "💍"],
-        "gives": ["💌"],
+        "wants": ["💌", "💍", ""],
+        "gives": ["🫧"],
         "unlocks": []
     }
 }
