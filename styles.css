@@ -113,6 +113,8 @@ body {
     flex-direction: column;
     gap: 15px;
     background: #fafafa;
+    overflow-y: auto;
+    max-height: 230px;
 }
 
 .bubble_req, .bubble_res {
@@ -298,11 +300,11 @@ body {
     border: none;
 }
 
-.send__button:hover,
+/* .send__button:hover,
 .erase__button:hover {
     font-size: 1.6rem;
 
-} 
+}  */
 
 .disabled {
     filter: grayscale(100%);
