@@ -104,7 +104,7 @@ body {
 
 .bubble_req {
     align-self: flex-end;
-    background: #ffcc00;
+    background: #a6cf01;
 }
 
 .bubble_req::before {
@@ -121,7 +121,7 @@ body {
 
 .bubble_res {
     align-self: flex-start;
-    background: #cc1b5b;
+    background: #30989b;
 }
 
 .bubble_res::before {

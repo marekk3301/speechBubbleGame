@@ -324,7 +324,7 @@ function updateContactDisplay() {
 
     // Display the wants list in the contact description
     const wantsList = currentContact.wants.join(' ');
-    contactDescriptionElement.textContent = `${currentContact.description}\nWants: ${wantsList}`;
+    contactDescriptionElement.textContent = `${wantsList}`;
 
     // Display the chat history
     const chatHistory = currentContact.chatHistory;
