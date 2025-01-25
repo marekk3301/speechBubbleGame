@@ -5,7 +5,7 @@ const emojiSelectedElement = document.querySelector('.selected');
 
 let selectedEmojis = [];
 let allEmojis = {};
-let selectedCategory = '';
+let selectedCategory = '🙂';
 
 async function getEmojisJSON() {
     try {
@@ -33,7 +33,7 @@ function populateEmojiList(emojis) {
     // Add each existing category and newly created categories to the list
     Object.keys(emojis.categories).forEach(emote => {
         const listItem = document.createElement('li');
-        listItem.className = 'emoji';
+        listItem.className = 'emoji__category';
         listItem.textContent = emote; // Use the category name as text
 
         if (emojis.categories[emote].unlocked.length === 0) {
@@ -47,7 +47,6 @@ function populateEmojiList(emojis) {
             listItem.addEventListener('click', () => {
                 selectedCategory = emote;
                 refreshEmojis(emote);
-                populateEmojiList(allEmojis); // Re-populate the list to update the highlight
             });
         }
 
@@ -55,36 +54,86 @@ function populateEmojiList(emojis) {
     });
 }
 
+function refreshEmojis(emote) {
+    console.log(`Refreshing emojis for category: ${emote}`); // Log the selected category
+
+    emojiListElement.innerHTML = ''; // Clear the emoji list
+
+    if (!allEmojis.categories[emote]) {
+        console.error(`Category ${emote} not found in allEmojis.`);
+        return;
+    }
+
+    // Display all unlocked emojis in the selected category
+    allEmojis.categories[emote].unlocked.forEach(emoji => {
+        const emojiItem = document.createElement('li');
+        emojiItem.className = 'emoji';
+        emojiItem.textContent = emoji; // Use emoji as text
+        emojiItem.addEventListener('click', () => {
+            selectedEmojis.push(emoji);
+            const selectedItem = document.createElement('li');
+            selectedItem.className = 'selected__emoji';
+            selectedItem.textContent = emoji;
+            emojiSelectedElement.appendChild(selectedItem);
+        });
+        emojiListElement.appendChild(emojiItem);
+    });
+}
 
 function checkRecipe() {
+    const currentContact = contacts[Object.keys(contacts)[currentContactIndex]];
+
+    // Process recipe matching and unlocking emojis
+    const newEmoji = processRecipes();
+
+    // Handle chat functionality
+    const matchedEmojis = matchAndRemoveWants(currentContact);
+    addToChatHistory(currentContact, matchedEmojis);
+
+    // Handle response if all wants are satisfied
+    if (currentContact.wants.length === 0) {
+        handleWantsSatisfied(currentContact);
+    } else if (newEmoji) {
+        currentContact.chatHistory.push({
+            type: 'res',
+            text: newEmoji // Respond with the unlocked emoji
+        });
+    }
+
+    // Update UI
+    refreshUI();
+}
+
+// Step 1: Process recipes and unlock emojis
+function processRecipes() {
     let newEmoji = "";
-    Object.keys(allEmojis.categories).forEach(emote => {
-        Object.keys(allEmojis.categories[emote]).forEach(emoji => {
-            if (emoji !== 'unlocked' && emoji !== "to_recieve") {
-                allEmojis.categories[emote][emoji].forEach(recipe => {
-                    // Check if selected emojis match the recipe
+
+    Object.keys(allEmojis.categories).forEach(category => {
+        Object.keys(allEmojis.categories[category]).forEach(emoji => {
+            if (emoji !== 'unlocked' && emoji !== 'to_recieve') {
+                allEmojis.categories[category][emoji].forEach(recipe => {
                     if (areArraysEqualUnordered(recipe, selectedEmojis)) {
-                        // Unlock the emoji by adding it to the unlocked list
-                        allEmojis.categories[emote].unlocked.push(emoji);
-                        delete allEmojis.categories[emote][emoji];  // Remove the recipe once it's unlocked
-                        console.log(`Unlocked emoji: ${emoji} for recipe: ${recipe}`);
-                        newEmoji = emoji
+                        // Prevent duplicates in unlocked list
+                        if (!allEmojis.categories[category].unlocked.includes(emoji)) {
+                            allEmojis.categories[category].unlocked.push(emoji);
+                            console.log(`Unlocked emoji: ${emoji} for recipe: ${recipe}`);
+                            newEmoji = emoji;
+                        }
                     }
                 });
             }
         });
     });
 
-    // Chat functionality
-    const currentContact = contacts[Object.keys(contacts)[currentContactIndex]];
-    const wants = currentContact.wants;
+    return newEmoji;
+}
 
-    // Copy selected emojis for comparison
+// Step 2: Match selected emojis with the contact's wants
+function matchAndRemoveWants(contact) {
     const sentEmojis = [...selectedEmojis];
-
-    // Find matching emojis and remove them from `wants`
     const matchedEmojis = [];
-    for (const emoji of wants) {
+
+    for (const emoji of contact.wants) {
         const emojiIndex = sentEmojis.indexOf(emoji);
         if (emojiIndex !== -1) {
             matchedEmojis.push(emoji);
@@ -92,81 +141,91 @@ function checkRecipe() {
         }
     }
 
-    // Remove all matched emojis from the wants list
-    for (const matchedEmoji of matchedEmojis) {
-        const wantIndex = wants.indexOf(matchedEmoji);
-        if (wantIndex !== -1) {
-            wants.splice(wantIndex, 1);
-        }
-    }
+    // Remove matched emojis from the wants list
+    contact.wants = contact.wants.filter(want => !matchedEmojis.includes(want));
 
-    // Add selected emojis as a chat message to the current contact's history
-    currentContact.chatHistory.push({
-        type: 'req', // Type 'req' for request bubbles
-        text: selectedEmojis.join(' ') // Convert the selected emojis to text
+    return matchedEmojis;
+}
+
+// Step 3: Add the selected emojis to the contact's chat history
+function addToChatHistory(contact, matchedEmojis) {
+    contact.chatHistory.push({
+        type: 'req',
+        text: selectedEmojis.join(' ')
     });
 
-    // Simulate a response based on whether all wants are satisfied
-    if (wants.length === 0) {
-        // Add emoji from "gives" to unlocked emojis
-        const givenEmoji = currentContact.gives[0]; // Assume one emoji is given
+    if (matchedEmojis.length === 0) {
+        // contact.chatHistory.push({
+        //     type: 'res',
+        //     text: "I didn't receive what I wanted."
+        // });
+        console.log("I didn't receive what I wanted.");
+    }
+}
 
-        // Find the correct category for the emoji, either by the 'to_recieve' array or 'unlocked'
-        let emojiCategory = Object.keys(allEmojis.categories).find(category => 
-            allEmojis.categories[category].to_recieve && allEmojis.categories[category].to_recieve.includes(givenEmoji) ||
-            allEmojis.categories[category].unlocked.includes(givenEmoji)
-        );
+// Step 4: Handle the scenario where all wants are satisfied
+function handleWantsSatisfied(contact) {
+    const givenEmoji = contact.gives[0];
 
-        // If the emoji is in the "to_recieve" array of a category, we use that category
-        if (!emojiCategory) {
-            // No category found, try to assign it based on 'to_recieve'
-            emojiCategory = Object.keys(allEmojis.categories).find(category => 
-                allEmojis.categories[category].to_recieve && allEmojis.categories[category].to_recieve.includes(givenEmoji)
-            );
+    if (givenEmoji) {
+        const category = findEmojiCategory(givenEmoji);
+
+        if (category && !allEmojis.categories[category].unlocked.includes(givenEmoji)) {
+            allEmojis.categories[category].unlocked.push(givenEmoji);
+            console.log(`Added ${givenEmoji} to category ${category}`);
         }
 
-        // Add the received emoji to the correct category's unlocked list
-        if (emojiCategory) {
-            allEmojis.categories[emojiCategory].unlocked.push(givenEmoji);
-            console.log(`Added ${givenEmoji} to category ${emojiCategory}`); // Log to verify
-        } else {
-            console.error(`Category for emoji ${givenEmoji} not found in 'to_recieve' or 'unlocked'.`);
-        }
+        unlockContacts(contact.unlocks);
+        markContactAsOffline(contact);
 
-        // Unlock contacts specified in the "unlocks" array
-        console.log(currentContact.unlocks);
-        unlockContacts(currentContact.unlocks);
-
-        // Mark the current contact as offline (inactive) using its name from the contact's key
-        const currentContactName = Object.keys(contacts)[currentContactIndex]; // Get the contact's name as the key
-        contacts[currentContactName].is_active = "false"; // Set the current contact's status to offline
-        console.log(`Marked ${currentContactName} as offline (inactive).`);
-
-        currentContact.chatHistory.push({
+        contact.chatHistory.push({
             type: 'res',
-            text: `You've given me everything I wanted! Here's a ${givenEmoji} for you!` // Example response
+            text: `You've given me everything I wanted! Here's a ${givenEmoji} for you!`
         });
-        currentContact.chatHistory.push({
+
+        contact.chatHistory.push({
             type: 'res',
-            text: `This user is offline` // Example response
+            text: "This user is offline."
         });
     } else {
-        currentContact.chatHistory.push({
-            type: 'res',
-            text: newEmoji // Example response
-        });
+        console.error("No emoji available to unlock.");
     }
+}
 
-    // Refresh all categories by re-populating the emoji list
-    populateEmojiList(allEmojis); // Re-populate all categories' emojis
+// Helper: Find the category for an emoji
+function findEmojiCategory(emoji) {
+    return Object.keys(allEmojis.categories).find(category =>
+        allEmojis.categories[category].to_recieve?.includes(emoji) ||
+        allEmojis.categories[category].unlocked.includes(emoji)
+    );
+}
 
-    // Display the updated chat history and contact description
+// Helper: Unlock contacts based on their "unlocks" property
+function unlockContacts(unlocks) {
+    unlocks.forEach(contactName => {
+        if (contacts[contactName]) {
+            contacts[contactName].is_active = true;
+            console.log(`Unlocked contact: ${contactName}`);
+        }
+    });
+}
+
+// Helper: Mark a contact as offline
+function markContactAsOffline(contact) {
+    const contactName = Object.keys(contacts)[currentContactIndex];
+    contacts[contactName].is_active = false;
+    console.log(`Marked ${contactName} as offline.`);
+}
+
+// Step 5: Refresh UI after processing
+function refreshUI() {
+    populateEmojiList(allEmojis);
+    refreshEmojis(selectedCategory);
     updateContactDisplay();
-
-    // Clear selected emojis
     selectedEmojis = [];
     emojiSelectedElement.innerHTML = '';
 }
+
 
 function unlockContacts(unlockArray) {
     unlockArray.forEach(unlockedContact => {
@@ -199,36 +258,6 @@ function unlockContacts(unlockArray) {
         }
     });
 }
-
-
-
-
-function refreshEmojis(emote) {
-    console.log(`Refreshing emojis for category: ${emote}`); // Log the selected category
-
-    emojiListElement.innerHTML = ''; // Clear the emoji list
-
-    if (!allEmojis.categories[emote]) {
-        console.error(`Category ${emote} not found in allEmojis.`);
-        return;
-    }
-
-    // Display all unlocked emojis in the selected category
-    allEmojis.categories[emote].unlocked.forEach(emoji => {
-        const emojiItem = document.createElement('li');
-        emojiItem.className = 'emoji';
-        emojiItem.textContent = emoji; // Use emoji as text
-        emojiItem.addEventListener('click', () => {
-            selectedEmojis.push(emoji);
-            const selectedItem = document.createElement('li');
-            selectedItem.className = 'selected__emoji';
-            selectedItem.textContent = emoji;
-            emojiSelectedElement.appendChild(selectedItem);
-        });
-        emojiListElement.appendChild(emojiItem);
-    });
-}
-
 
 function areArraysEqualUnordered(arr1, arr2) {
     if (arr1.length !== arr2.length) return false;
