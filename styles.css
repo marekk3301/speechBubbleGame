@@ -169,13 +169,13 @@ body {
     flex-wrap: wrap;
 }
 
-.emoji {
+.emoji__category {
     font-size: 1.5rem;
     cursor: pointer;
     transition: transform 0.2s;
 }
 
-.emoji:hover {
+.emoji__category:hover {
     transform: scale(1.2);
 }
 
