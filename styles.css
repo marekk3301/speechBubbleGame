@@ -29,7 +29,7 @@ body {
 .phone {
     width: 480px;
     height: 640px;
-    background: #fff;
+    background: black;
     border: solid black;
     border-color: black;
     border-width: 4px 5px 4px 6px; /* Border styling similar to .box1 */
@@ -50,7 +50,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: linear-gradient(90deg, #c56295, #cc1b5b);
+    background:  #ca1c5b;
     padding: 20px 15px;
     padding-top: 25px;
     height: 80px;
@@ -65,7 +65,7 @@ body {
 
 .contact-name {
     font-size: 1.9rem;
-    color: #fddb00;
+    color: #fcbc0f;
     text-shadow: 2px 5px #000000;
     letter-spacing: 5px; /* Increases space between the letters */
     -webkit-text-stroke: 1px #000000; /* Adds a border/stroke to the letters */
@@ -82,7 +82,7 @@ body {
 .prev-contact, .next-contact {
     color: #000;
     border: 3px solid #000;
-    background: #ffcc00;
+    background: #fcbc0f;
     padding: 9px 12px;
     border-radius: 8px;
     cursor: pointer;
@@ -101,8 +101,7 @@ body {
 }
 
 .prev-contact:hover, .next-contact:hover {
-    background: #ff9900;
-    color: #fff;
+    background: #cc9603;
     text-shadow: none;
 }
 
@@ -112,7 +111,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    background: #fafafa;
+    background: #6274c5;
 }
 
 .bubble_req, .bubble_res {
@@ -129,7 +128,7 @@ body {
 
 .bubble_req {
     align-self: flex-end;
-    background: #a6cf01;
+    background: #f5f6f1;
 }
 
 .bubble_req::before {
@@ -146,7 +145,7 @@ body {
 
 .bubble_res {
     align-self: flex-start;
-    background: #30989b;
+    background: #f5f6f1;
 }
 
 .bubble_res::before {
@@ -163,7 +162,7 @@ body {
 
 .panel {
     padding: 20px 30px;
-    background: #f9f9f9;
+    background: #a6cd07;
     display: flex;
     flex-direction: column;
     gap: 15px;
