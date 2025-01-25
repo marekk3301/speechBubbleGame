@@ -75,8 +75,6 @@ function checkRecipe() {
         });    
     });
 
-    // Chat functionality
-
     const currentContact = contacts[Object.keys(contacts)[currentContactIndex]];
     const wants = currentContact.wants;
 
@@ -128,6 +126,10 @@ function checkRecipe() {
             type: 'res',
             text: `You've given me everything I wanted! Here's a ${givenEmoji} for you!` // Example response
         });
+
+        // Disable input and show offline message
+        disableContactInput(Object.keys(contacts)[currentContactIndex]);
+
     } else {
         currentContact.chatHistory.push({
             type: 'res',
@@ -246,6 +248,14 @@ function updateContactDisplay() {
         bubbleElement.textContent = bubble.text;
         bubblesContainer.appendChild(bubbleElement);
     });
+}
+
+function disableContactInput(contactName) {
+    const sendButton = document.querySelector('.send__button');
+    sendButton.disabled = true; // Disable the send button
+
+    const contactNameElement = document.querySelector('.contact-name');
+    contactNameElement.textContent = `${contactName} is offline`; // Change name to "offline" message
 }
 
 // Main function
