@@ -3,7 +3,7 @@
         "description": "Clementine is a very funny person. She loves to laugh and make others laugh.",
         "is_active": true,
         "wants": ["🤣", "😂", "😄"],
-        "gives": ["🐈"],
+        "gives": ["🐈", "👙"],
         "unlocks": ["Annie", "Fortune Teller"]
     },
     "Dylan": {
@@ -24,7 +24,7 @@
     "Cook Clint": {
         "description": "Annie's father and amateur chef",
         "is_active": false,
-        "wants": ["", "", ""],
+        "wants": ["🍗", "", ""],
         "gives": [""],
         "unlocks": ["Chef Gordon"]
     },
@@ -32,14 +32,14 @@
         "description": "",
         "is_active": false,
         "wants": ["", "", ""],
-        "gives": ["🌾"],
+        "gives": ["🌾", "🐥"],
         "unlocks": ["Ranger Rodger"]
     },
     "Ranger Rodger": {
         "description": "",
         "is_active": false,
         "wants": ["", "", ""],
-        "gives": [""],
+        "gives": ["🎣"],
         "unlocks": []
     },
     "Chef Gordon": {
