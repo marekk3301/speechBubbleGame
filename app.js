@@ -27,16 +27,14 @@ async function getEmojisJSON() {
 }
 
 function populateEmojiList(emojis) {
-
     selectedEmojis = [];
-    // Clear the current list (if needed)
-    emojiCategoriesElement.innerHTML = '';
+    emojiCategoriesElement.innerHTML = ''; // Clear the list of categories
 
-    // Populate the list with emojis
+    // Add each existing category and newly created categories to the list
     Object.keys(emojis.categories).forEach(emote => {
         const listItem = document.createElement('li');
         listItem.className = 'emoji';
-        listItem.textContent = emote; // Use emote key as text
+        listItem.textContent = emote; // Use the category name as text
 
         if (emojis.categories[emote].unlocked.length === 0) {
             listItem.classList.add('disabled');
@@ -55,9 +53,8 @@ function populateEmojiList(emojis) {
 
         emojiCategoriesElement.appendChild(listItem);
     });
-
-    return selectedEmojis;
 }
+
 
 function checkRecipe() {
     Object.keys(allEmojis.categories).forEach(emote => {
@@ -68,13 +65,13 @@ function checkRecipe() {
                         allEmojis.categories[emote].unlocked.push(emoji);
                         delete allEmojis.categories[emote][emoji];
                         console.log(allEmojis);
-                        refreshEmojis(selectedCategory); // Pass the current category to refresh
                     }
                 });
             }
-        });    
+        });
     });
 
+    // Chat functionality
     const currentContact = contacts[Object.keys(contacts)[currentContactIndex]];
     const wants = currentContact.wants;
 
@@ -110,26 +107,35 @@ function checkRecipe() {
         // Add emoji from "gives" to unlocked emojis
         const givenEmoji = currentContact.gives[0]; // Assume one emoji is given
 
-        // Ensure the emoji is added to the correct category
-        const emojiCategory = Object.keys(allEmojis.categories).find(category =>
-            allEmojis.categories[category].unlocked.includes(givenEmoji) ||
-            allEmojis.categories[category][givenEmoji]
+        // Find the correct category for the emoji, either by the 'to_recieve' array or 'unlocked'
+        let emojiCategory = Object.keys(allEmojis.categories).find(category => 
+            allEmojis.categories[category].to_recieve && allEmojis.categories[category].to_recieve.includes(givenEmoji) ||
+            allEmojis.categories[category].unlocked.includes(givenEmoji)
         );
 
+        // If the emoji is in the "to_recieve" array of a category, we use that category
+        if (!emojiCategory) {
+            // No category found, try to assign it based on 'to_recieve'
+            emojiCategory = Object.keys(allEmojis.categories).find(category => 
+                allEmojis.categories[category].to_recieve && allEmojis.categories[category].to_recieve.includes(givenEmoji)
+            );
+        }
+
+        // Add the received emoji to the correct category's unlocked list
         if (emojiCategory) {
             allEmojis.categories[emojiCategory].unlocked.push(givenEmoji);
+            console.log(`Added ${givenEmoji} to category ${emojiCategory}`); // Log to verify
         } else {
-            console.error(`Category for emoji ${givenEmoji} not found.`);
+            console.error(`Category for emoji ${givenEmoji} not found in 'to_recieve' or 'unlocked'.`);
         }
+
+        // Refresh all categories by re-populating the emoji list
+        populateEmojiList(allEmojis); // Re-populate all categories' emojis
 
         currentContact.chatHistory.push({
             type: 'res',
             text: `You've given me everything I wanted! Here's a ${givenEmoji} for you!` // Example response
         });
-
-        // Disable input and show offline message
-        disableContactInput(Object.keys(contacts)[currentContactIndex]);
-
     } else {
         currentContact.chatHistory.push({
             type: 'res',
@@ -145,7 +151,12 @@ function checkRecipe() {
     emojiSelectedElement.innerHTML = '';
 }
 
+
+
+
 function refreshEmojis(emote) {
+    console.log(`Refreshing emojis for category: ${emote}`); // Log the selected category
+
     emojiListElement.innerHTML = ''; // Clear the emoji list
 
     if (!allEmojis.categories[emote]) {
@@ -153,6 +164,7 @@ function refreshEmojis(emote) {
         return;
     }
 
+    // Display all unlocked emojis in the selected category
     allEmojis.categories[emote].unlocked.forEach(emoji => {
         const emojiItem = document.createElement('li');
         emojiItem.className = 'emoji';
@@ -167,6 +179,7 @@ function refreshEmojis(emote) {
         emojiListElement.appendChild(emojiItem);
     });
 }
+
 
 function areArraysEqualUnordered(arr1, arr2) {
     if (arr1.length !== arr2.length) return false;
@@ -248,14 +261,6 @@ function updateContactDisplay() {
         bubbleElement.textContent = bubble.text;
         bubblesContainer.appendChild(bubbleElement);
     });
-}
-
-function disableContactInput(contactName) {
-    const sendButton = document.querySelector('.send__button');
-    sendButton.disabled = true; // Disable the send button
-
-    const contactNameElement = document.querySelector('.contact-name');
-    contactNameElement.textContent = `${contactName} is offline`; // Change name to "offline" message
 }
 
 // Main function
