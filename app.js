@@ -1,4 +1,4 @@
-// Emojis     
+// Emojis
 const emojiCategoriesElement = document.querySelector('.categories__list');
 const emojiListElement = document.querySelector('.emoji__list');
 const emojiSelectedElement = document.querySelector('.selected');
@@ -109,9 +109,24 @@ function checkRecipe() {
 
     // Simulate a response based on whether all wants are satisfied
     if (wants.length === 0) {
+        // Add emoji from "gives" to unlocked emojis
+        const givenEmoji = currentContact.gives[0]; // Assume one emoji is given
+
+        // Ensure the emoji is added to the correct category
+        const emojiCategory = Object.keys(allEmojis.categories).find(category =>
+            allEmojis.categories[category].unlocked.includes(givenEmoji) ||
+            allEmojis.categories[category][givenEmoji]
+        );
+
+        if (emojiCategory) {
+            allEmojis.categories[emojiCategory].unlocked.push(givenEmoji);
+        } else {
+            console.error(`Category for emoji ${givenEmoji} not found.`);
+        }
+
         currentContact.chatHistory.push({
             type: 'res',
-            text: "You've given me everything I wanted!" // Example response
+            text: `You've given me everything I wanted! Here's a ${givenEmoji} for you!` // Example response
         });
     } else {
         currentContact.chatHistory.push({
