@@ -1,3 +1,4 @@
+/* General styles */
 * {
     margin: 0;
     padding: 0;
@@ -9,18 +10,19 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
+    background: url('./assets/conversation_background.png') no-repeat center center;
+    background-size: cover;
+    font-family: "Comic Sans MS", "Patrick Hand", cursive;
 }
 
 .phone {
     width: 360px;
     height: 640px;
     background: #fff;
-    border: 2px solid #ccc;
+    border: 5px solid #000;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
 }
@@ -35,9 +37,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #f4f4f4;
+    background: linear-gradient(90deg, #c56295, #cc1b5b);
     padding: 10px 15px;
     height: 80px;
+    border-bottom: 5px solid #000;
 }
 
 .contact-info {
@@ -46,119 +49,128 @@ body {
 }
 
 .contact-name {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: bold;
-    margin: 0;
-    color: #333;
+    color: #000;
+    text-shadow: 1px 1px #fff;
 }
 
 .contact-description {
-    font-size: 0.8rem;
-    color: #666;
-    margin: 5px 0 0;
-    padding: 0px 7px;
+    font-size: 0.9rem;
+    color: #333;
+    text-shadow: 1px 1px #fff;
+    margin-top: 5px;
 }
 
 .prev-contact, .next-contact {
-    color: #007BFF;
-    border: solid 2px #007BFF;
+    color: #000;
+    border: 3px solid #000;
+    background: #ffcc00;
     padding: 9px 12px;
     border-radius: 8px;
     cursor: pointer;
     font-size: 1rem;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    text-shadow: 1px 1px #fff;
 }
 
 .prev-contact:hover, .next-contact:hover {
-    background-color: #007BFF;
+    background: #ff9900;
     color: #fff;
+    text-shadow: none;
 }
 
 .bubbles {
     flex: 2;
-    padding: 10px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
     overflow-y: auto;
-    background: #f9f9f9;
-    box-shadow: inset 0 0px 5px rgba(0, 0, 0, 0.16);
+    background: #fafafa;
+}
+
+.bubble_req, .bubble_res {
+    padding: 10px 15px;
+    border-radius: 20px;
+    max-width: 70%;
+    font-size: 1.2rem;
+    position: relative;
+    font-family: "Comic Sans MS", cursive;
+    text-shadow: 1px 1px #fff;
+    border: 3px solid #000;
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
 }
 
 .bubble_req {
     align-self: flex-end;
-    background: #d1e7ff;
-    padding: 10px;
-    border-radius: 10px;
-    max-width: 70%;
-    font-size: 27px;
+    background: #ffcc00;
+}
+
+.bubble_req::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    right: 15px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 10px 0 0;
+    border-color: #000000 transparent transparent transparent;
 }
 
 .bubble_res {
     align-self: flex-start;
-    background: #e5e5e5;
-    padding: 10px;
-    border-radius: 10px;
-    max-width: 70%;
-    font-size: 20px;
+    background: #cc1b5b;
 }
 
-.bubble.status-message {
-    align-self: center;
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 10px;
-    border-radius: 10px;
-    max-width: 80%;
-    font-size: 1rem;
-    text-align: center;
-    font-style: italic;
-    border: 1px solid #f5c6cb;
+.bubble_res::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 15px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 0 0 10px;
+    border-color: #000000 transparent transparent transparent;
 }
 
 .panel {
     padding: 10px;
-    background: #f1f1f1;
+    background: #f9f9f9;
+    border-top: 5px solid #000;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    flex: 0 0 40%;
-}
-
-.categories {
-    display: flex;
-    justify-content: center;
+    gap: 15px;
 }
 
 .categories__list {
     display: flex;
     list-style: none;
     gap: 15px;
-    width: 100%;
     justify-content: center;
 }
 
 .category {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     cursor: pointer;
-    padding: 5px;
-    transition: background 0.2s, transform 0.2s;
+    transition: transform 0.2s;
+    text-shadow: 1px 1px #fff;
 }
 
 .category:hover {
-    background: #e0e0e0;
-    border-radius: 5px;
-    transform: scale(1.1);
+    transform: scale(1.2);
 }
 
 .keyboard {
     display: flex;
     flex-wrap: wrap;
     padding: 10px;
-    background: #f9f9f9;
-    border: 1px solid #ddd;
+    background: #f1f1f1;
+    border: 3px solid #000;
     border-radius: 10px;
-    flex: 1;
+    gap: 10px;
     overflow-y: auto;
 }
 
@@ -173,6 +185,7 @@ body {
     font-size: 1.5rem;
     cursor: pointer;
     transition: transform 0.2s;
+    text-shadow: 1px 1px #fff;
 }
 
 .emoji:hover {
@@ -186,7 +199,7 @@ body {
     padding: 5px;
     background: #fff;
     border-radius: 10px;
-    border-top: 1px solid #ddd;
+    border: 3px solid #000;
 }
 
 .input ul {
@@ -204,56 +217,22 @@ body {
 }
 
 .send__button {
-    background-color: #007bff;
+    background: #ff3300;
     color: #fff;
-    border: none;
+    border: 3px solid #000;
     border-radius: 10px;
     padding: 9px 9px;
     cursor: pointer;
     font-size: 1rem;
-    transition: background-color 0.3s;
+    text-shadow: 1px 1px #fff;
+    transition: all 0.3s ease;
 }
 
 .send__button:hover {
-    background-color: #0056b3;
+    background: #cc2900;
+    text-shadow: none;
 }
 
 .disabled {
     filter: grayscale(100%);
-}
-
-/* Target the entire scrollbar */
-::-webkit-scrollbar {
-    width: 6px; /* Make the vertical scrollbar thinner */
-    margin-right: 2px; /* Space between scrollbar and right edge */
-    margin-top: 3px; /* Space between scrollbar and top edge */
-    margin-bottom: 3px; /* Space between scrollbar and bottom edge */
-  }
-  
-  /* Style the track (background of the scrollbar) */
-  ::-webkit-scrollbar-track {
-    background: transparent; /* Light gray background */
-    border-radius: 10px; /* Rounded corners */
-    padding: 4px 0; /* Optional: add space at top and bottom of the track */
-  }
-  
-  /* Style the thumb (the draggable part of the scrollbar) */
-  ::-webkit-scrollbar-thumb {
-    background: #b0b0b0; /* Lighter gray color for the thumb */
-    border-radius: 10px; /* Rounded corners */
-  }
-  
-  /* Hover effect for the thumb */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #888; /* Slightly darker gray when hovered */
-  }
-  
-  
-  
-
-@media screen and (max-width: 400px) {
-    .phone {
-        width: 320px;
-        height: 560px;
-    }
 }
