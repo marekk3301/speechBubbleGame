@@ -232,6 +232,7 @@ function handleWantsSatisfied(contact) {
     });
 
     inputLocked = true;
+    updatePanel();
 }
 
 
@@ -390,6 +391,7 @@ nextContactButton.addEventListener('click', () => {
         const contactToRemove = contactNames[currentContactIndex-1];
         delete contacts[contactToRemove];
         inputLocked = false;
+        updatePanel();
     }
     updateContactDisplay();
 });
@@ -440,6 +442,16 @@ function updateContactDisplay() {
     bubblesContainer.scrollTop = bubblesContainer.scrollHeight;
 }
 
+const panel = document.querySelector('.panel');
+
+// Function to update the panel appearance based on inputLocked
+function updatePanel() {
+    if (inputLocked) {
+        panel.classList.add('disabled');  // Apply the dark filter
+    } else {
+        panel.classList.remove('disabled');  // Remove the dark filter
+    }
+}
 
 
 // Main function
