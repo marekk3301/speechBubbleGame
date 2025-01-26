@@ -140,14 +140,14 @@
         "description": "I’m a masterpiece already, but I wouldn’t mind a little sparkle.",
         "is_active": false,
         "wants": ["🖼️"],
-        "gives": [""],
+        "gives": ["🎀"],
         "unlocks": []
     },
 
     "Lady Adelaide": {
         "description": "Greetings, my dearest, I trust you have brought forth the gifts I so rightfully deserve?",
         "is_active": false,
-        "wants": ["💌", "💍", "👗", "👑", "🍾"],
+        "wants": ["💌", "👑", "🍾", "🛸", "🎁"],
         "gives": ["🫧"],
         "unlocks": []
     }

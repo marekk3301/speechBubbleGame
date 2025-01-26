@@ -225,14 +225,17 @@ function handleWantsSatisfied(contact) {
         });
     }
 
-    // Push the "offline" message inside a comic-style bubble
-    contact.chatHistory.push({
-        type: 'res',
-        text: `This user is offline`
-    });
+    if (contact.gives != "Dylan") {
+        console.log(contact.gives)
+        // Push the "offline" message inside a comic-style bubble
+        contact.chatHistory.push({
+            type: 'res',
+            text: `This user is offline`
+        });
 
-    inputLocked = true;
-    updatePanel();
+        inputLocked = true;
+        updatePanel();
+    }
 }
 
 
