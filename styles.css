@@ -201,6 +201,7 @@ body {
     border-radius: 10px;
     gap: 10px;
     overflow-y: auto;
+    height: 150px;
 
     &::-webkit-scrollbar {
         width: 14px;
@@ -230,6 +231,9 @@ body {
     cursor: pointer;
     transition: transform 0.2s;
     text-shadow: 1px 1px #fff;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    max-height: 20px;
 }
 
 .emoji__category {
