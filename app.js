@@ -225,13 +225,17 @@ function handleWantsSatisfied(contact) {
         });
     }
 
-    // Push the "offline" message inside a comic-style bubble
-    contact.chatHistory.push({
-        type: 'res',
-        text: `This user is offline`
-    });
+    if (contact.gives != "Dylan") {
+        console.log(contact.gives)
+        // Push the "offline" message inside a comic-style bubble
+        contact.chatHistory.push({
+            type: 'res',
+            text: `This user is offline`
+        });
 
-    inputLocked = true;
+        inputLocked = true;
+        updatePanel();
+    }
 }
 
 
@@ -390,6 +394,7 @@ nextContactButton.addEventListener('click', () => {
         const contactToRemove = contactNames[currentContactIndex-1];
         delete contacts[contactToRemove];
         inputLocked = false;
+        updatePanel();
     }
     updateContactDisplay();
 });
@@ -441,6 +446,16 @@ function updateContactDisplay() {
     bubblesContainer.scrollTop = bubblesContainer.scrollHeight;
 }
 
+const panel = document.querySelector('.panel');
+
+// Function to update the panel appearance based on inputLocked
+function updatePanel() {
+    if (inputLocked) {
+        panel.classList.add('disabled');  // Apply the dark filter
+    } else {
+        panel.classList.remove('disabled');  // Remove the dark filter
+    }
+}
 
 
 // Main function
