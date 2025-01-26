@@ -57,7 +57,7 @@ function populateEmojiList(emojis) {
 }
 
 function refreshEmojis(emote) {
-    console.log(`Refreshing emojis for category: ${emote}`); // Log the selected category
+    // console.log(`Refreshing emojis for category: ${emote}`); // Log the selected category
 
     emojiListElement.innerHTML = ''; // Clear the emoji list
 
@@ -74,6 +74,11 @@ function refreshEmojis(emote) {
         emojiItem.addEventListener('click', () => {
             if (inputLocked) return;
             selectedEmojis.push(emoji);
+            if (selectedEmojis.length > 5){
+                selectedEmojis = [];
+                emojiSelectedElement.innerHTML = '';
+                return;
+            } 
             const selectedItem = document.createElement('li');
             selectedItem.className = 'selected__emoji';
             selectedItem.textContent = emoji;
@@ -85,7 +90,7 @@ function refreshEmojis(emote) {
 
 function checkRecipe() {
     if (selectedEmojis.length === 0) {
-        console.log('No emojis selected.');
+        // console.log('No emojis selected.');
         return;
     }
     const currentContact = contacts[Object.keys(contacts)[currentContactIndex]];
@@ -123,7 +128,7 @@ function processRecipes() {
                         // Prevent duplicates in unlocked list
                         if (!allEmojis.categories[category].unlocked.includes(emoji)) {
                             allEmojis.categories[category].unlocked.push(emoji);
-                            console.log(`Unlocked emoji: ${emoji} for recipe: ${recipe}`);
+                            // console.log(`Unlocked emoji: ${emoji} for recipe: ${recipe}`);
                             newEmoji = emoji;
                         }
                     }
@@ -166,7 +171,7 @@ function addToChatHistory(contact, matchedEmojis) {
         //     type: 'res',
         //     text: "I didn't receive what I wanted."
         // });
-        console.log("I didn't receive what I wanted.");
+        // console.log("I didn't receive what I wanted.");
     }
 }
 
@@ -179,7 +184,7 @@ function handleWantsSatisfied(contact) {
 
             if (category && !allEmojis.categories[category].unlocked.includes(givenEmoji)) {
                 allEmojis.categories[category].unlocked.push(givenEmoji);
-                console.log(`Added ${givenEmoji} to category ${category}`);
+                // console.log(`Added ${givenEmoji} to category ${category}`);
             }
 
             unlockContacts(contact.unlocks);
@@ -214,7 +219,7 @@ function findEmojiCategory(emoji) {
 function markContactAsOffline(contact) {
     const contactName = Object.keys(contacts)[currentContactIndex];
     contacts[contactName].is_active = false;
-    console.log(`Marked ${contactName} as offline.`);
+    // console.log(`Marked ${contactName} as offline.`);
 }
 
 // Step 5: Refresh UI after processing
@@ -231,36 +236,36 @@ function unlockContacts(unlocks) {
     unlocks.forEach(contactName => {
         if (contacts[contactName]) {
             contacts[contactName].is_active = true;
-            console.log(`Unlocked contact: ${contactName}`);
+            // console.log(`Unlocked contact: ${contactName}`);
         }
     });
 }
 function unlockContacts(unlockArray) {
     unlockArray.forEach(unlockedContact => {
         // Ensure the contact exists in the allContacts object (even inactive ones)
-        console.log(allContacts);
-        console.log(unlockedContact);
+        // console.log(allContacts);
+        // console.log(unlockedContact);
 
         // Check if the contact exists in allContacts
         if (allContacts.hasOwnProperty(unlockedContact)) {
             // Log to ensure the contacts and unlockedContact are accessible
-            console.log("Unlocking:", unlockedContact);
-            console.log("Contact details:", allContacts[unlockedContact]);
+            // console.log("Unlocking:", unlockedContact);
+            // console.log("Contact details:", allContacts[unlockedContact]);
 
             // Set the status of the unlocked contact to active
             allContacts[unlockedContact].is_active = "true"; // Set the status to active
-            console.log(`Unlocked ${unlockedContact} and set status to active.`);
+            // console.log(`Unlocked ${unlockedContact} and set status to active.`);
 
             // Add the unlocked contact to the active contacts list
             // We need to add it to contacts object if not already there
             if (!contacts.hasOwnProperty(unlockedContact)) {
                 contacts[unlockedContact] = allContacts[unlockedContact]; // Add to active contacts
                 contacts[unlockedContact].chatHistory = []; // Initialize the chat history array
-                console.log(`${unlockedContact} has been added to active contacts.`);
+                // console.log(`${unlockedContact} has been added to active contacts.`);
             }
 
             // Optional: Log the unlocked contact's status
-            console.log(`${unlockedContact} is now active: ${allContacts[unlockedContact].is_active}`);
+            // console.log(`${unlockedContact} is now active: ${allContacts[unlockedContact].is_active}`);
         } else {
             console.log(`Contact ${unlockedContact} is not found in the allContacts list.`);
         }
@@ -300,12 +305,12 @@ async function getContactsJSON() {
 
         // Parse the response data as JSON
         allContacts = await response.json(); // Save all contacts, including inactive ones
-        console.log('Fetched Contacts:', allContacts); // Debugging the fetched data
+        // console.log('Fetched Contacts:', allContacts); // Debugging the fetched data
 
         // Filter only active contacts
         const activeContacts = Object.keys(allContacts).filter(contactName => allContacts[contactName].is_active);
 
-        console.log('Active Contacts:', activeContacts); // Debugging the active contacts
+        // console.log('Active Contacts:', activeContacts); // Debugging the active contacts
 
         // Create a new object containing only active contacts
         contacts = {};
@@ -333,7 +338,14 @@ prevContactButton.addEventListener('click', () => {
     if (contactNames.length === 0) return;
 
     currentContactIndex = (currentContactIndex - 1 + contactNames.length) % contactNames.length;
-    inputLocked = false;
+    if (inputLocked === true) {
+        if (contactNames.length === 0) return;
+        console.log(contactNames[currentContactIndex-1]);
+
+        const contactToRemove = contactNames[currentContactIndex+1];
+        delete contacts[contactToRemove];
+        inputLocked = false;
+    }
     updateContactDisplay();
 });
 
@@ -342,7 +354,14 @@ nextContactButton.addEventListener('click', () => {
     if (contactNames.length === 0) return;
 
     currentContactIndex = (currentContactIndex + 1) % contactNames.length;
-    inputLocked = false;
+    if (inputLocked === true) {
+        if (contactNames.length === 0) return;
+        console.log(contactNames[currentContactIndex-1]);
+
+        const contactToRemove = contactNames[currentContactIndex-1];
+        delete contacts[contactToRemove];
+        inputLocked = false;
+    }
     updateContactDisplay();
 });
 
@@ -388,6 +407,8 @@ function updateContactDisplay() {
         bubbleElement.textContent = bubble.text;
         bubblesContainer.appendChild(bubbleElement);
     });
+
+    bubblesContainer.scrollTop = bubblesContainer.scrollHeight;
 }
 
 

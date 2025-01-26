@@ -15,6 +15,11 @@ body {
     background: url('./assets/conversation_background.png') no-repeat center center;
     background-size: cover;
     font-family: 'Bangers', cursive;
+
+    user-select:none;
+    -webkit-user-select:none;
+    -moz-user-select:-moz-none;
+    -ms-user-select:none;
 }
 
 .phone-wrapper {
