@@ -14,7 +14,7 @@ body {
     height: 100vh;
     background: url('./assets/background.jpg') no-repeat center center;
     background-size: cover;
-    font-family: 'Bangers', "Comic Sans", cursive;
+    font-family: 'Bangers', "Comic Sans", sans-serif;
     /* disable selection in game */
     user-select:none;
     -webkit-user-select:none;
@@ -142,7 +142,7 @@ body {
     max-width: 70%;
     font-size: 1.2rem;
     position: relative;
-    font-family: "Comic Sans MS", cursive;
+    font-family: "Comic Sans", sans-serif;
     text-shadow: 1px 1px #fff;
     border: 3px solid #000;
     box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.7);
