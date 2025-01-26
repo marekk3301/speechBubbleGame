@@ -10,7 +10,7 @@
         "description": "Sup? Just vibin’ over here. Wanna chill?",
         "is_active": true,
         "wants": ["🍕", "🍔", "🌭", "🌮"],
-        "gives": ["🔥", "", "🕶️"],
+        "gives": ["🔥"],
         "unlocks": ["Dj David", "Teacher"]
     },
 
@@ -18,50 +18,50 @@
         "description": "Hi! Got any cats? I can’t resist a new furry friend! ",
         "is_active": false,
         "wants": ["😺", "😸", "😹", "😿"],
-        "gives": ["❤️", "🌱"],
+        "gives": ["❤️"],
         "unlocks": ["Cook Clint", "Farmer Frank"]
     },
     "Cook Clint": {
         "description": "Hey! Ever tried my famous chicken? Amateur chef, big dreams!",
         "is_active": false,
-        "wants": ["🍗", "", ""],
-        "gives": ["🧄"],
+        "wants": ["🍗", "🍚", "🧀"],
+        "gives": ["🧄", "🥕"],
         "unlocks": ["Chef Gordon"]
     },
     "Farmer Frank": {
         "description": "Howdy! Got anything fresh for the farm?",
         "is_active": false,
-        "wants": ["", "", ""],
+        "wants": ["🍵"],
         "gives": ["🌾", "🐥"],
         "unlocks": ["Ranger Rodger"]
     },
     "Ranger Rodger": {
         "description": "Fishing’s my thing! Got bait?",
         "is_active": false,
-        "wants": ["", "", ""],
-        "gives": ["🎣"],
+        "wants": ["🍖", "🍗"],
+        "gives": ["🍽️"],
         "unlocks": []
     },
     "Chef Gordon": {
         "description": "Only the finest cuisine for the finest guests. Impress me!",
         "is_active": false,
-        "wants": ["🍣", "🍷", "🍰", "🔪", "🍽"],
-        "gives": [""],
+        "wants": ["🍣", "🍷", "🍰", "🔪", "🍽️"],
+        "gives": ["🍾"],
         "unlocks": []
     },
 
     "Big Jim": {
         "description": "What do you have for me? Let’s make a deal",
         "is_active": false,
-        "wants": ["💊", "🌿", ""],
+        "wants": ["💊", "🌿"],
         "gives": ["💣", "💲"],
         "unlocks": ["Santa Claus"]
     },
     "Bubbles The Clown": {
         "description": "Haha! Wanna see a trick? Don’t mind the knife... ",
         "is_active": false,
-        "wants": ["🤡", "", ""],
-        "gives": ["🔪"],
+        "wants": ["🤡", "🎊"],
+        "gives": ["🪓"],
         "unlocks": []
     },
     "Dj David": {
@@ -82,14 +82,14 @@
     "Fortune Teller": {
         "description": "Let me peer into your future... what do you have for me?",
         "is_active": false,
-        "wants": ["", "", ""],
-        "gives": [""],
+        "wants": ["🐈", "🐈‍⬛"],
+        "gives": ["🃏"],
         "unlocks": ["Wizzard", "Vampire"]
     },
     "Wizzard": {
         "description": "Magic awaits—care to unlock it?",
         "is_active": false,
-        "wants": ["", "", ""],
+        "wants": ["🪄", "🔮", "🐇"],
         "gives": [""],
         "unlocks": []
     },
@@ -103,14 +103,14 @@
     "Mr. Bones": {
         "description": "Careful, I’ve got a bone to pick with you",
         "is_active": false,
-        "wants": ["", "", "⚰", ""],
+        "wants": ["⚰"],
         "gives": ["💀", "🦴"],
         "unlocks": []
     },
     "Frankenstein": {
         "description": "I just need a little... heartwarming gift",
         "is_active": false,
-        "wants": ["❤️", "🎁", "💉", ""],
+        "wants": ["❤️", "🎁", "💉"],
         "gives": ["👽"],
         "unlocks": ["Lady Adelaide"]
     },
@@ -118,7 +118,7 @@
     "Teacher": {
         "description": "Knowledge is power! Got anything to help me inspire?",
         "is_active": false,
-        "wants": ["📄", "", ""],
+        "wants": ["📄"],
         "gives": ["👓"],
         "unlocks": ["Painter Bob", "Nicolaj Copiernik", "A man in need"]
     },
@@ -147,14 +147,14 @@
         "description": "I’m a masterpiece already, but I wouldn’t mind a little sparkle.",
         "is_active": false,
         "wants": ["", "", ""],
-        "gives": ["👑"],
+        "gives": [""],
         "unlocks": []
     },
 
     "Lady Adelaide": {
         "description": "Greetings, my dearest, I trust you have brought forth the gifts I so rightfully deserve?",
         "is_active": false,
-        "wants": ["💌", "💍", "👗"],
+        "wants": ["💌", "💍", "👗", "👑", "🍾"],
         "gives": ["🫧"],
         "unlocks": []
     }
