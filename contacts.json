@@ -1,49 +1,49 @@
 {
     "Clementine": {
-        "description": "Clementine is a very funny person. She loves to laugh and make others laugh.",
+        "description": "Hey there! Ready for some laughs? I promise I’ll crack you up!",
         "is_active": true,
         "wants": ["🤣", "😂", "😄"],
-        "gives": ["🐈", "👙"],
+        "gives": ["🪡", "🐾"],
         "unlocks": ["Annie", "Fortune Teller"]
     },
     "Dylan": {
-        "description": "Dylan just loves to chill.",
+        "description": "Sup? Just vibin’ over here. Wanna chill?",
         "is_active": true,
-        "wants": ["☹️", "😢", "😭"],
-        "gives": ["🔥", "🍕", "🕶️"],
+        "wants": ["🍕", "🍔", "🌭", "🌮"],
+        "gives": ["🔥", "", "🕶️"],
         "unlocks": ["Dj David", "Teacher"]
     },
 
     "Annie": {
-        "description": "Annie loves cats, she adopts every single one.",
+        "description": "Hi! Got any cats? I can’t resist a new furry friend! ",
         "is_active": false,
         "wants": ["😺", "😸", "😹", "😿"],
         "gives": ["❤️", "🌱"],
         "unlocks": ["Cook Clint", "Farmer Frank"]
     },
     "Cook Clint": {
-        "description": "Annie's father and amateur chef",
+        "description": "Hey! Ever tried my famous chicken? Amateur chef, big dreams!",
         "is_active": false,
         "wants": ["🍗", "", ""],
-        "gives": [""],
+        "gives": ["🧄"],
         "unlocks": ["Chef Gordon"]
     },
     "Farmer Frank": {
-        "description": "",
+        "description": "Howdy! Got anything fresh for the farm?",
         "is_active": false,
         "wants": ["", "", ""],
         "gives": ["🌾", "🐥"],
         "unlocks": ["Ranger Rodger"]
     },
     "Ranger Rodger": {
-        "description": "",
+        "description": "Fishing’s my thing! Got bait?",
         "is_active": false,
         "wants": ["", "", ""],
         "gives": ["🎣"],
         "unlocks": []
     },
     "Chef Gordon": {
-        "description": "Top class chef",
+        "description": "Only the finest cuisine for the finest guests. Impress me!",
         "is_active": false,
         "wants": ["🍣", "🍷", "🍰", "🔪", "🍽"],
         "gives": [""],
@@ -51,28 +51,28 @@
     },
 
     "Big Jim": {
-        "description": "Local mafia's boss",
+        "description": "What do you have for me? Let’s make a deal",
         "is_active": false,
         "wants": ["💊", "🌿", ""],
-        "gives": ["💣"],
+        "gives": ["💣", "💲"],
         "unlocks": ["Santa Claus"]
     },
     "Bubbles The Clown": {
-        "description": "Annie's father and amateur chef",
+        "description": "Haha! Wanna see a trick? Don’t mind the knife... ",
         "is_active": false,
         "wants": ["🤡", "", ""],
         "gives": ["🔪"],
         "unlocks": []
     },
     "Dj David": {
-        "description": "",
+        "description": "Party’s starting! Got any vibes to throw my way?",
         "is_active": false,
         "wants": ["🤩", "🥳", "🤢", "🤮"],
         "gives": [""],
         "unlocks": ["Big Jim", "Bubbles The Clown"]
     },
     "Santa Claus": {
-        "description": "",
+        "description": "Ho ho ho! What’s on your wish list?",
         "is_active": false,
         "wants": ["", "", "", ""],
         "gives": [""],
@@ -80,74 +80,81 @@
     },
 
     "Fortune Teller": {
-        "description": "",
+        "description": "Let me peer into your future... what do you have for me?",
         "is_active": false,
         "wants": ["", "", ""],
         "gives": [""],
         "unlocks": ["Wizzard", "Vampire"]
     },
     "Wizzard": {
-        "description": "",
+        "description": "Magic awaits—care to unlock it?",
         "is_active": false,
         "wants": ["", "", ""],
         "gives": [""],
         "unlocks": []
     },
     "Vampire": {
-        "description": "",
+        "description": "Come closer, darling... I won’t bite—unless you want me to",
         "is_active": false,
         "wants": ["🧄", "🔪"],
         "gives": ["⚰"],
         "unlocks": ["Mr. Bones"]
     },
     "Mr. Bones": {
-        "description": "",
+        "description": "Careful, I’ve got a bone to pick with you",
         "is_active": false,
         "wants": ["", "", "⚰", ""],
-        "gives": ["💀"],
+        "gives": ["💀", "🦴"],
         "unlocks": []
     },
     "Frankenstein": {
-        "description": "",
+        "description": "I just need a little... heartwarming gift",
         "is_active": false,
-        "wants": ["❤️", "🎁", "", ""],
-        "gives": [""],
+        "wants": ["❤️", "🎁", "💉", ""],
+        "gives": ["👽"],
         "unlocks": ["Lady Adelaide"]
     },
 
     "Teacher": {
-        "description": "",
+        "description": "Knowledge is power! Got anything to help me inspire?",
         "is_active": false,
-        "wants": ["", "", ""],
-        "gives": [""],
-        "unlocks": ["Painter Bob", "Nicolaj Copiernik"]
+        "wants": ["📄", "", ""],
+        "gives": ["👓"],
+        "unlocks": ["Painter Bob", "Nicolaj Copiernik", "A man in need"]
     },
-    "Painter Bob": {
-        "description": "",
+    "A man in need": {
+        "description": "Psst! Don't leave me here...",
         "is_active": false,
-        "wants": ["", "", ""],
-        "gives": [""],
+        "wants": ["🧻"],
+        "gives": ["💩"],
         "unlocks": []
     },
-    "Nicolaj Copiernik": {
-        "description": "",
+    "Painter Bob": {
+        "description": "Every color tells a story—what’s yours?",
         "is_active": false,
-        "wants": ["🌞", "💦", "🌧"],
+        "wants": ["", "", ""],
+        "gives": ["🎨"],
+        "unlocks": ["Mona Lisa"]
+    },
+    "Nicolaj Copiernik": {
+        "description": "The stars and skies await. Care to join me?",
+        "is_active": false,
+        "wants": ["🌞", "🌦️", "🌧️", "🌩️"],
         "gives": ["⭐️", "☄️"],
         "unlocks": []
     },
     "Mona Lisa": {
-        "description": "",
+        "description": "I’m a masterpiece already, but I wouldn’t mind a little sparkle.",
         "is_active": false,
         "wants": ["", "", ""],
-        "gives": ["🪡", "🎀", "💎"],
+        "gives": ["👑"],
         "unlocks": []
     },
 
     "Lady Adelaide": {
         "description": "Greetings, my dearest, I trust you have brought forth the gifts I so rightfully deserve?",
         "is_active": false,
-        "wants": ["💌", "💍", ""],
+        "wants": ["💌", "💍", "👗"],
         "gives": ["🫧"],
         "unlocks": []
     }
