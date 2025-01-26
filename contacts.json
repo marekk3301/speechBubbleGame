@@ -55,7 +55,7 @@
         "is_active": false,
         "wants": ["💊", "🌿", ""],
         "gives": ["💣"],
-        "unlocks": []
+        "unlocks": ["Santa Claus"]
     },
     "Bubbles The Clown": {
         "description": "Annie's father and amateur chef",
@@ -69,6 +69,13 @@
         "is_active": false,
         "wants": ["🤩", "🥳", "🤢", "🤮"],
         "gives": [""],
+        "unlocks": ["Big Jim", "Bubbles The Clown"]
+    },
+    "Santa Claus": {
+        "description": "",
+        "is_active": false,
+        "wants": ["", "", "", ""],
+        "gives": [""],
         "unlocks": []
     },
 
@@ -77,7 +84,7 @@
         "is_active": false,
         "wants": ["", "", ""],
         "gives": [""],
-        "unlocks": []
+        "unlocks": ["Wizzard", "Vampire"]
     },
     "Wizzard": {
         "description": "",
@@ -91,7 +98,7 @@
         "is_active": false,
         "wants": ["🧄", "🔪"],
         "gives": ["⚰"],
-        "unlocks": []
+        "unlocks": ["Mr. Bones"]
     },
     "Mr. Bones": {
         "description": "",
@@ -100,13 +107,20 @@
         "gives": ["💀"],
         "unlocks": []
     },
+    "Frankenstein": {
+        "description": "",
+        "is_active": false,
+        "wants": ["❤️", "🎁", "", ""],
+        "gives": [""],
+        "unlocks": ["Lady Adelaide"]
+    },
 
     "Teacher": {
         "description": "",
         "is_active": false,
         "wants": ["", "", ""],
         "gives": [""],
-        "unlocks": []
+        "unlocks": ["Painter Bob", "Nicolaj Copiernik"]
     },
     "Painter Bob": {
         "description": "",
@@ -120,6 +134,13 @@
         "is_active": false,
         "wants": ["🌞", "💦", "🌧"],
         "gives": ["⭐️", "☄️"],
+        "unlocks": []
+    },
+    "Mona Lisa": {
+        "description": "",
+        "is_active": false,
+        "wants": ["", "", ""],
+        "gives": ["🪡", "🎀", "💎"],
         "unlocks": []
     },
 

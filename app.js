@@ -355,7 +355,15 @@ function updateContactDisplay() {
     // Display the contact name and description
     contactNameElement.textContent = contactNames[currentContactIndex];
 
-    // Display the wants list in the contact description
+    // Ensure the description is added as the first chat message if not already present
+    if (!currentContact.chatHistory.some(bubble => bubble.text === currentContact.description)) {
+        currentContact.chatHistory.unshift({
+            type: 'res', // Mark it as a response
+            text: currentContact.description
+        });
+    }
+
+    // Display the wants list in the contact description (for extra context)
     const wantsList = currentContact.wants.join(' ');
     contactDescriptionElement.textContent = `${wantsList}`;
 
@@ -375,6 +383,7 @@ function updateContactDisplay() {
         bubblesContainer.appendChild(bubbleElement);
     });
 }
+
 
 
 // Main function
