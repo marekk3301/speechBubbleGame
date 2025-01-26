@@ -18,7 +18,7 @@
         "description": "Hi! Got any cats? I can’t resist a new furry friend! ",
         "is_active": false,
         "wants": ["😺", "😸", "😹", "😿"],
-        "gives": ["❤️"],
+        "gives": ["❤️", "💊"],
         "unlocks": ["Cook Clint", "Farmer Frank"]
     },
     "Cook Clint": {
@@ -61,36 +61,29 @@
         "description": "Haha! Wanna see a trick? Don’t mind the knife... ",
         "is_active": false,
         "wants": ["🤡", "🎊"],
-        "gives": ["🪓"],
+        "gives": ["🔪", "🪓"],
         "unlocks": []
     },
     "Dj David": {
         "description": "Party’s starting! Got any vibes to throw my way?",
         "is_active": false,
-        "wants": ["🤩", "🥳", "🤢", "🤮"],
+        "wants": ["🤩", "🤢", "🤮"],
         "gives": [""],
         "unlocks": ["Big Jim", "Bubbles The Clown"]
     },
-    "Santa Claus": {
-        "description": "Ho ho ho! What’s on your wish list?",
-        "is_active": false,
-        "wants": ["", "", "", ""],
-        "gives": [""],
-        "unlocks": []
-    },
-
+    
     "Fortune Teller": {
         "description": "Let me peer into your future... what do you have for me?",
         "is_active": false,
         "wants": ["🐈", "🐈‍⬛"],
-        "gives": ["🃏"],
+        "gives": ["⭐", "🃏"],
         "unlocks": ["Wizzard", "Vampire"]
     },
     "Wizzard": {
         "description": "Magic awaits—care to unlock it?",
         "is_active": false,
         "wants": ["🪄", "🔮", "🐇"],
-        "gives": [""],
+        "gives": ["⚡"],
         "unlocks": []
     },
     "Vampire": {
@@ -132,7 +125,7 @@
     "Painter Bob": {
         "description": "Every color tells a story—what’s yours?",
         "is_active": false,
-        "wants": ["", "", ""],
+        "wants": ["🍯"],
         "gives": ["🎨"],
         "unlocks": ["Mona Lisa"]
     },
@@ -140,13 +133,13 @@
         "description": "The stars and skies await. Care to join me?",
         "is_active": false,
         "wants": ["🌞", "🌦️", "🌧️", "🌩️"],
-        "gives": ["⭐️", "☄️"],
+        "gives": ["☄️"],
         "unlocks": []
     },
     "Mona Lisa": {
         "description": "I’m a masterpiece already, but I wouldn’t mind a little sparkle.",
         "is_active": false,
-        "wants": ["", "", ""],
+        "wants": ["🖼️"],
         "gives": [""],
         "unlocks": []
     },
