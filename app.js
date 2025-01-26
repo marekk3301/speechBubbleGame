@@ -7,6 +7,8 @@ let selectedEmojis = [];
 let allEmojis = {};
 let selectedCategory = '🙂';
 
+inputLocked = false;
+
 async function getEmojisJSON() {
     try {
         // Fetch the emojis.json file
@@ -70,6 +72,7 @@ function refreshEmojis(emote) {
         emojiItem.className = 'emoji';
         emojiItem.textContent = emoji; // Use emoji as text
         emojiItem.addEventListener('click', () => {
+            if (inputLocked) return;
             selectedEmojis.push(emoji);
             const selectedItem = document.createElement('li');
             selectedItem.className = 'selected__emoji';
@@ -169,31 +172,34 @@ function addToChatHistory(contact, matchedEmojis) {
 
 // Step 4: Handle the scenario where all wants are satisfied
 function handleWantsSatisfied(contact) {
-    const givenEmoji = contact.gives[0];
+    const givenEmojis = contact.gives;
+    givenEmojis.forEach(givenEmoji => {
+        if (givenEmoji) {
+            const category = findEmojiCategory(givenEmoji);
 
-    if (givenEmoji) {
-        const category = findEmojiCategory(givenEmoji);
+            if (category && !allEmojis.categories[category].unlocked.includes(givenEmoji)) {
+                allEmojis.categories[category].unlocked.push(givenEmoji);
+                console.log(`Added ${givenEmoji} to category ${category}`);
+            }
 
-        if (category && !allEmojis.categories[category].unlocked.includes(givenEmoji)) {
-            allEmojis.categories[category].unlocked.push(givenEmoji);
-            console.log(`Added ${givenEmoji} to category ${category}`);
+            unlockContacts(contact.unlocks);
+            markContactAsOffline(contact);
+
+            contact.chatHistory.push({
+                type: 'res',
+                text: `You've given me everything I wanted! Here's a ${givenEmoji} for you!`
+            });
+
+            contact.chatHistory.push({
+                type: 'res',
+                text: "This user is offline."
+            });
+
+            inputLocked = true;
+        } else {
+            console.error("No emoji available to unlock.");
         }
-
-        unlockContacts(contact.unlocks);
-        markContactAsOffline(contact);
-
-        contact.chatHistory.push({
-            type: 'res',
-            text: `You've given me everything I wanted! Here's a ${givenEmoji} for you!`
-        });
-
-        contact.chatHistory.push({
-            type: 'res',
-            text: "This user is offline."
-        });
-    } else {
-        console.error("No emoji available to unlock.");
-    }
+    });
 }
 
 // Helper: Find the category for an emoji
@@ -202,16 +208,6 @@ function findEmojiCategory(emoji) {
         allEmojis.categories[category].to_recieve?.includes(emoji) ||
         allEmojis.categories[category].unlocked.includes(emoji)
     );
-}
-
-// Helper: Unlock contacts based on their "unlocks" property
-function unlockContacts(unlocks) {
-    unlocks.forEach(contactName => {
-        if (contacts[contactName]) {
-            contacts[contactName].is_active = true;
-            console.log(`Unlocked contact: ${contactName}`);
-        }
-    });
 }
 
 // Helper: Mark a contact as offline
@@ -231,6 +227,15 @@ function refreshUI() {
 }
 
 
+// Helper: Unlock contacts based on their "unlocks" property
+function unlockContacts(unlocks) {
+    unlocks.forEach(contactName => {
+        if (contacts[contactName]) {
+            contacts[contactName].is_active = true;
+            console.log(`Unlocked contact: ${contactName}`);
+        }
+    });
+}
 function unlockContacts(unlockArray) {
     unlockArray.forEach(unlockedContact => {
         // Ensure the contact exists in the allContacts object (even inactive ones)
@@ -329,6 +334,7 @@ prevContactButton.addEventListener('click', () => {
     if (contactNames.length === 0) return;
 
     currentContactIndex = (currentContactIndex - 1 + contactNames.length) % contactNames.length;
+    inputLocked = false;
     updateContactDisplay();
 });
 
@@ -337,6 +343,7 @@ nextContactButton.addEventListener('click', () => {
     if (contactNames.length === 0) return;
 
     currentContactIndex = (currentContactIndex + 1) % contactNames.length;
+    inputLocked = false;
     updateContactDisplay();
 });
 

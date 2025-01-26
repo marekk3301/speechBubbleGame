@@ -33,7 +33,7 @@ body {
     border: solid black;
     border-color: black;
     border-width: 4px 5px 4px 6px; /* Border styling similar to .box1 */
-    border-radius: 99% 4% 52% 5%/2% 15% 6% 95%;
+    /* border-radius: 99% 4% 52% 5%/2% 15% 6% 95%; */
     overflow: hidden;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
     display: flex;
@@ -54,7 +54,7 @@ body {
     padding: 20px 15px;
     padding-top: 25px;
     height: 80px;
-    border-radius: 0% 0% 0% 95%/80% 4% 92% 5%;
+    /* border-radius: 0% 0% 0% 95%/80% 4% 92% 5%; */
     border-bottom: 5px solid #000;
 }
 
@@ -94,10 +94,10 @@ body {
 }
 
 .prev-contact {
-    border-radius:75% 50% 67% 65%/40% 74% 30% 70%;
+    /* border-radius:75% 50% 67% 65%/40% 74% 30% 70%; */
 }
 .next-contact {
-    border-radius:35% 50% 57% 45%/40% 34% 30% 35%;
+    /* border-radius:35% 50% 57% 45%/40% 34% 30% 35%; */
 }
 
 .prev-contact:hover, .next-contact:hover {
@@ -169,7 +169,7 @@ body {
     flex-direction: column;
     gap: 15px;
     border-top: 5px solid #000; /* Only top border */
-    border-radius: 1% 95% 6% 95%/95% 4% 92% 5%;
+    /* border-radius: 1% 95% 6% 95%/95% 4% 92% 5%; */
     /* No other borders, just the top one */
 }
 
