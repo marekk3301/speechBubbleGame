@@ -54,6 +54,17 @@ function populateEmojiList(emojis) {
 
         emojiCategoriesElement.appendChild(listItem);
     });
+    const allEmojisTab = document.createElement('li');
+    allEmojisTab.className = 'emoji__category';
+    allEmojisTab.textContent = '📃';
+    allEmojisTab.addEventListener('click', () => {
+        showAllEmojis();
+    });
+    emojiCategoriesElement.appendChild(allEmojisTab);
+}
+
+function showAllEmojis() {
+    return;
 }
 
 function refreshEmojis(emote) {
