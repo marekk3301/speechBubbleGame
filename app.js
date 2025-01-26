@@ -58,7 +58,7 @@ function populateEmojiList(emojis) {
     allEmojisTab.className = 'emoji__category';
     allEmojisTab.textContent = '📃';
     allEmojisTab.addEventListener('click', () => {
-        showAllEmojis();
+        // showAllEmojis();
     });
     emojiCategoriesElement.appendChild(allEmojisTab);
 }
@@ -389,6 +389,7 @@ function updateContactDisplay() {
     const currentContact = contacts[contactNames[currentContactIndex]];
 
     // Display the contact name and description
+    console.log(contactNameElement);
     contactNameElement.textContent = contactNames[currentContactIndex];
 
     // Ensure the description is added as the first chat message if not already present

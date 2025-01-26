@@ -32,9 +32,10 @@ body {
 
 /* The phone container itself */
 .phone {
+    position: relative;
     width: 480px;
     height: 640px;
-    background: rgba(65, 60, 124, 0.3);
+    background: black;
     border: solid black;
     border-color: black;
     border-width: 4px 5px 4px 6px; /* Border styling similar to .box1 */
@@ -46,27 +47,34 @@ body {
 }
 
 .all-emojis {
+    display: flex;
     display: none;
-    width: 90%;
-    height: 90%;
-    background: #f1f1f1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #d0e57a;
     z-index: 3;
 }
 
 .app {
     flex: 1;
+    display: none;
     display: flex;
     flex-direction: column;
 }
 
-.contacts {
+.contacts,
+.title-box {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     background:  #ca1c5b;
     padding: 20px 15px;
     padding-top: 25px;
     height: 80px;
+    width: 100%;
     /* border-radius: 0% 0% 0% 95%/80% 4% 92% 5%; */
     border-bottom: 5px solid #000;
 }
@@ -76,14 +84,14 @@ body {
     flex-grow: 1;
 }
 
-.contact-name {
+.contact-name,
+.title-text {
     font-size: 1.9rem;
     color: #fcbc0f;
     text-shadow: 2px 5px #000000;
     letter-spacing: 5px; /* Increases space between the letters */
     -webkit-text-stroke: 1px #000000; /* Adds a border/stroke to the letters */
 }
-
 
 .contact-description {
     font-size: 1.5rem;
@@ -191,7 +199,6 @@ body {
     border-top: 5px solid #000; /* Only top border */
     /* border-radius: 1% 95% 6% 95%/95% 4% 92% 5%; */
     /* No other borders, just the top one */
-    
 }
 
 
@@ -268,11 +275,6 @@ body {
     transform: scale(1.2);
 }
 
-.selected-category {
-    background-color: magenta;
-    transform: scale(1.2);
-}
-
 .input {
     display: flex;
     align-items: center;
@@ -282,21 +284,7 @@ body {
     background: #fff;
     border-radius: 10px;
     border: 3px solid #000;
-    position: relative; /* Add this for positioning the triangle */
 }
-
-.input::after {
-    content: '';
-    position: absolute;
-    bottom: -15px; /* Position the triangle below the box */
-    right: 20px; /* Adjust the left position */
-    width: 0;
-    height: 0;
-    border-left: 11px solid transparent; 
-    border-right: 3px solid transparent;
-    border-top: 15px solid #000; /* Color of the triangle */
-}
-
 
 .input ul {
     list-style: none;
