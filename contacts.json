@@ -68,10 +68,10 @@
         "description": "Party’s starting! Got any vibes to throw my way?",
         "is_active": false,
         "wants": ["🤩", "🤢", "🤮"],
-        "gives": [""],
+        "gives": ["🚗"],
         "unlocks": ["Big Jim", "Bubbles The Clown"]
     },
-    
+
     "Fortune Teller": {
         "description": "Let me peer into your future... what do you have for me?",
         "is_active": false,
@@ -90,20 +90,20 @@
         "description": "Come closer, darling... I won’t bite—unless you want me to",
         "is_active": false,
         "wants": ["🧄", "🔪"],
-        "gives": ["⚰"],
+        "gives": ["⚰️"],
         "unlocks": ["Mr. Bones"]
     },
     "Mr. Bones": {
         "description": "Careful, I’ve got a bone to pick with you",
         "is_active": false,
-        "wants": ["⚰"],
+        "wants": ["⚰️"],
         "gives": ["💀", "🦴"],
         "unlocks": []
     },
     "Frankenstein": {
         "description": "I just need a little... heartwarming gift",
         "is_active": false,
-        "wants": ["❤️", "🎁", "💉"],
+        "wants": ["❤️", "💉", "👻"],
         "gives": ["👽"],
         "unlocks": ["Lady Adelaide"]
     },
