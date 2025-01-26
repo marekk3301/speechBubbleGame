@@ -92,6 +92,10 @@ body {
     transform: translateX(17px);
 }
 
+.last__emoji__category {
+    margin-left: 15px;
+}
+
 .emoji__locked {
     filter: brightness(0) blur(1px) opacity(0.6);
 }

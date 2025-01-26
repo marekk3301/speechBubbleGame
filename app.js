@@ -65,7 +65,7 @@ function populateEmojiList(emojis) {
         emojiCategoriesElement.appendChild(listItem);
     });
     const allEmojisTab = document.createElement('li');
-    allEmojisTab.className = 'emoji__category';
+    allEmojisTab.className = 'emoji__category last__emoji__category';
     allEmojisTab.textContent = '📃';
     fillListWithEmojis();
     allEmojisTab.addEventListener('click', () => {
@@ -75,6 +75,7 @@ function populateEmojiList(emojis) {
 }
 
 function showAllEmojis() {
+    fillListWithEmojis();
     AllEmojisListElement.style.display = 'flex';
     appElement.style.display = 'none';
 }
@@ -85,6 +86,7 @@ function hideAllEmojis() {
 }
 
 function fillListWithEmojis() {
+    document.querySelector('.list__all').innerHTML = '';
     Object.keys(allEmojis.categories).forEach(category => {
         const categoryElement = document.createElement('ul');
         categoryElement.className = 'list__category';
@@ -93,7 +95,7 @@ function fillListWithEmojis() {
         toReceive = allEmojis.categories[category].to_recieve;
         toUnlock = Object.keys(allEmojis.categories[category])
 
-        all = toUnlock.concat(toReceive).sort();
+        all = toReceive.concat(toUnlock);
 
         all.forEach(emoji => {
             if (!(emoji === 'unlocked' || emoji === 'to_recieve')) {
@@ -102,7 +104,11 @@ function fillListWithEmojis() {
                 emojiElement.textContent = emoji;
                 if (!unlocked.includes(emoji)) {
                     emojiElement.classList.add('emoji__locked');
+                } else {
+                    console.log(allEmojis.categories[category].unlocked);
+                    emojiElement.classList.remove('emoji__locked');
                 }
+
                 categoryElement.appendChild(emojiElement);
             };
         });
