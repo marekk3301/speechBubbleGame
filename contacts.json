@@ -1,6 +1,6 @@
 {
     "Clementine": {
-        "description": "Hey there! Ready for some laughs? I promise I’ll crack you up!",
+        "description": "Why was the keyboard such a great friend? It always had a space to listen!",
         "is_active": true,
         "wants": ["🤣", "😂", "😄"],
         "gives": ["🪡", "🐾"],
@@ -39,7 +39,7 @@
         "description": "Fishing’s my thing! Got bait?",
         "is_active": false,
         "wants": ["🍖", "🍗"],
-        "gives": ["🍽️"],
+        "gives": ["🍽️", "🍫"],
         "unlocks": []
     },
     "Chef Gordon": {
@@ -98,7 +98,7 @@
         "is_active": false,
         "wants": ["⚰️"],
         "gives": ["💀", "🦴"],
-        "unlocks": []
+        "unlocks": ["Frankenstein"]
     },
     "Frankenstein": {
         "description": "I just need a little... heartwarming gift",
@@ -149,6 +149,14 @@
         "is_active": false,
         "wants": ["💌", "👑", "🍾", "🛸", "🎁"],
         "gives": ["🫧"],
+        "unlocks": ["You've won!"]
+    },
+
+    "You've won!": {
+        "description": "The magnificent Lady Adelaide has fallen head over heels for you. You may now continue building your collection, finishing your conversations and perhaps new strangers might drop you a message!",
+        "is_active": false,
+        "wants": [" "],
+        "gives": [""],
         "unlocks": []
     }
 }
