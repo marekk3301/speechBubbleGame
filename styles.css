@@ -32,6 +32,7 @@ body {
 
 /* The phone container itself */
 .phone {
+    position: relative;
     width: 480px;
     height: 640px;
     background: rgba(65, 60, 124, 0.3);
@@ -47,10 +48,56 @@ body {
 
 .all-emojis {
     display: none;
-    width: 90%;
-    height: 90%;
-    background: #f1f1f1;
-    z-index: 3;
+    /* display: flex; */
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    z-index: 5;
+}
+
+.list__all {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    
+    &::-webkit-scrollbar {
+        width: 14px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background-color: #acacac;
+        border-radius: 7px;
+        border: 4px solid #acacac;
+    }
+}
+
+.list__category {
+    font-size: 2.5rem;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    gap: 15px;
+    padding: 15px;
+    transform: translateX(17px);
+}
+
+.last__emoji__category {
+    margin-left: 15px;
+}
+
+.emoji__locked {
+    filter: brightness(0) blur(1px) opacity(0.6);
 }
 
 .app {
@@ -59,14 +106,17 @@ body {
     flex-direction: column;
 }
 
-.contacts {
+.contacts,
+.title-box {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     background:  #ca1c5b;
     padding: 20px 15px;
     padding-top: 25px;
     height: 80px;
+    min-height: 80px;
+    width: 100%;
     /* border-radius: 0% 0% 0% 95%/80% 4% 92% 5%; */
     border-bottom: 5px solid #000;
 }
@@ -76,7 +126,8 @@ body {
     flex-grow: 1;
 }
 
-.contact-name {
+.contact-name,
+.title-text {
     font-size: 1.9rem;
     color: #fcbc0f;
     text-shadow: 2px 5px #000000;
@@ -84,6 +135,9 @@ body {
     -webkit-text-stroke: 1px #000000; /* Adds a border/stroke to the letters */
 }
 
+.title-text {
+    position: absolute;
+}
 
 .contact-description {
     font-size: 1.5rem;
@@ -92,7 +146,9 @@ body {
     margin: 4px 0px;
 }
 
-.prev-contact, .next-contact {
+.prev-contact, 
+.next-contact,
+.close__button {
     color: #000;
     border: 3px solid #000;
     background: #fcbc0f;
@@ -104,6 +160,11 @@ body {
     text-shadow: 1px 1px #fff;
     border-width: 3px 2px 2px 4px;
     transform: rotate(1deg);
+}
+
+.close__button {
+    position: absolute;
+    right: 19px;
 }
 
 .prev-contact:hover, .next-contact:hover {

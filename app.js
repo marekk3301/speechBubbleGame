@@ -2,6 +2,8 @@
 const emojiCategoriesElement = document.querySelector('.categories__list');
 const emojiListElement = document.querySelector('.emoji__list');
 const emojiSelectedElement = document.querySelector('.selected');
+const AllEmojisListElement = document.querySelector('.all-emojis');
+const appElement = document.querySelector('.app');
 
 let selectedEmojis = [];
 let allEmojis = {};
@@ -63,17 +65,57 @@ function populateEmojiList(emojis) {
         emojiCategoriesElement.appendChild(listItem);
     });
     const allEmojisTab = document.createElement('li');
-    allEmojisTab.className = 'emoji__category';
+    allEmojisTab.className = 'emoji__category last__emoji__category';
     allEmojisTab.textContent = '📃';
+    fillListWithEmojis();
     allEmojisTab.addEventListener('click', () => {
-        // showAllEmojis();
+        showAllEmojis();
     });
     emojiCategoriesElement.appendChild(allEmojisTab);
 }
 
 function showAllEmojis() {
-    return;
+    fillListWithEmojis();
+    AllEmojisListElement.style.display = 'flex';
+    appElement.style.display = 'none';
 }
+
+function hideAllEmojis() {
+    AllEmojisListElement.style.display = 'none';
+    appElement.style.display = 'flex';
+}
+
+function fillListWithEmojis() {
+    document.querySelector('.list__all').innerHTML = '';
+    Object.keys(allEmojis.categories).forEach(category => {
+        const categoryElement = document.createElement('ul');
+        categoryElement.className = 'list__category';
+
+        unlocked = allEmojis.categories[category].unlocked;
+        toReceive = allEmojis.categories[category].to_recieve;
+        toUnlock = Object.keys(allEmojis.categories[category])
+
+        all = toReceive.concat(toUnlock);
+
+        all.forEach(emoji => {
+            if (!(emoji === 'unlocked' || emoji === 'to_recieve')) {
+                const emojiElement = document.createElement('li');
+                emojiElement.className = 'list__emoji';
+                emojiElement.textContent = emoji;
+                if (!unlocked.includes(emoji)) {
+                    emojiElement.classList.add('emoji__locked');
+                } else {
+                    console.log(allEmojis.categories[category].unlocked);
+                    emojiElement.classList.remove('emoji__locked');
+                }
+
+                categoryElement.appendChild(emojiElement);
+            };
+        });
+
+        document.querySelector('.list__all').appendChild(categoryElement);
+    }
+);}
 
 
 function refreshEmojis(emote) {
