@@ -226,7 +226,6 @@ function refreshUI() {
     emojiSelectedElement.innerHTML = '';
 }
 
-
 // Helper: Unlock contacts based on their "unlocks" property
 function unlockContacts(unlocks) {
     unlocks.forEach(contactName => {
