@@ -41,13 +41,21 @@ function populateEmojiList(emojis) {
         if (emojis.categories[emote].unlocked.length === 0) {
             listItem.classList.add('disabled');
         } else {
-            // Highlight the selected category
+            // Remove 'selected-category' from the previously selected category
             if (emote === selectedCategory) {
                 listItem.classList.add('selected-category');
             }
 
             listItem.addEventListener('click', () => {
+                // Remove 'selected-category' from any previously selected category
+                const previouslySelected = document.querySelector('.selected-category');
+                if (previouslySelected) {
+                    previouslySelected.classList.remove('selected-category');
+                }
+
+                // Update the selected category
                 selectedCategory = emote;
+                listItem.classList.add('selected-category');
                 refreshEmojis(emote);
             });
         }
@@ -66,6 +74,7 @@ function populateEmojiList(emojis) {
 function showAllEmojis() {
     return;
 }
+
 
 function refreshEmojis(emote) {
     // console.log(`Refreshing emojis for category: ${emote}`); // Log the selected category
@@ -189,34 +198,43 @@ function addToChatHistory(contact, matchedEmojis) {
 // Step 4: Handle the scenario where all wants are satisfied
 function handleWantsSatisfied(contact) {
     const givenEmojis = contact.gives;
+    const receivedItems = []; // This will store the emojis to show in the message
+
     givenEmojis.forEach(givenEmoji => {
         if (givenEmoji) {
             const category = findEmojiCategory(givenEmoji);
 
             if (category && !allEmojis.categories[category].unlocked.includes(givenEmoji)) {
                 allEmojis.categories[category].unlocked.push(givenEmoji);
-                // console.log(`Added ${givenEmoji} to category ${category}`);
             }
 
             unlockContacts(contact.unlocks);
             markContactAsOffline(contact);
 
-            contact.chatHistory.push({
-                type: 'res',
-                text: `You've given me everything I wanted! Here's a ${givenEmoji} for you!`
-            });
-
-            contact.chatHistory.push({
-                type: 'res',
-                text: "This user is offline."
-            });
-
-            inputLocked = true;
+            receivedItems.push(givenEmoji); // Add the given emoji to the list
         } else {
             console.error("No emoji available to unlock.");
         }
     });
+
+    // Only push the message once, with the list of received items
+    if (receivedItems.length > 0) {
+        contact.chatHistory.push({
+            type: 'res',
+            text: `Here's a ${receivedItems.join(", ")} for you!`
+        });
+    }
+
+    // Push the "offline" message inside a comic-style bubble
+    contact.chatHistory.push({
+        type: 'res',
+        text: `This user is offline`
+    });
+
+    inputLocked = true;
 }
+
+
 
 // Helper: Find the category for an emoji
 function findEmojiCategory(emoji) {
